@@ -504,6 +504,89 @@ function transformarArchivoCrudo(workbook) {
   return users;
 }
 
+async function construirHistorico(headers, siteId, archivos) {
+  const FUE_VALS = { advanced: 1, core: 0.2, selfservice: 0.033 };
+  const snapshots = new Map();
+
+  for (const archivo of archivos) {
+    try {
+      const wb = await descargarExcel(headers, siteId, archivo);
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const data = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+      if (data.length < 2) continue;
+
+      const dateKey = archivo.date.toISOString().split('T')[0];
+      let counts = null;
+
+      // Try summary format first (2-5 rows)
+      if (data.length <= 5) {
+        const headers_row = data[0].map(c => String(c).toLowerCase().trim());
+        if (headers_row.some(h => h.includes('total'))) {
+          const vals = data[1];
+          counts = { advanced: 0, core: 0, selfservice: 0, sinclasificar: 0 };
+          headers_row.forEach((h, i) => {
+            const v = Number(vals[i]) || 0;
+            if (h.includes('advanced'))      counts.advanced = v;
+            else if (h.includes('core'))     counts.core = v;
+            else if (h.includes('self'))     counts.selfservice = v;
+            else if (h.includes('sin clas')) counts.sinclasificar = v;
+          });
+        }
+      }
+
+      // Try user-level format
+      if (!counts) {
+        let headerIdx = -1, typeColIdx = -1;
+        for (let i = 0; i < Math.min(5, data.length); i++) {
+          const row = data[i].map(c => String(c).toLowerCase().trim());
+          const tIdx = row.findIndex(c => c.includes('clasificación de destino') || c.includes('clasificacion de destino') || c.includes('clasificación destino'));
+          if (tIdx >= 0) { headerIdx = i; typeColIdx = tIdx; break; }
+          const fIdx = row.findIndex(c => c === 'fues' || c === 'fue');
+          if (fIdx >= 0) { headerIdx = i; typeColIdx = row.findIndex(c => c.includes('clasificación') || c.includes('clasificacion')); break; }
+        }
+
+        // Fallback to column E (index 4)
+        if (headerIdx < 0) { headerIdx = 0; typeColIdx = 4; }
+
+        if (typeColIdx >= 0) {
+          counts = { advanced: 0, core: 0, selfservice: 0, sinclasificar: 0 };
+          for (let i = headerIdx + 1; i < data.length; i++) {
+            const row = data[i];
+            if (!row || !row[0]) continue;
+            const typeRaw = row[typeColIdx];
+            if (!typeRaw) continue;
+            const s = String(typeRaw).toLowerCase();
+            if (s.includes('advanced'))      counts.advanced++;
+            else if (s.includes('core'))     counts.core++;
+            else if (s.includes('self'))     counts.selfservice++;
+            else                             counts.sinclasificar++;
+          }
+        }
+      }
+
+      if (!counts) continue;
+
+      const totalUsers = counts.advanced + counts.core + counts.selfservice + counts.sinclasificar;
+      const fueTotal = +(counts.advanced * FUE_VALS.advanced + counts.core * FUE_VALS.core + counts.selfservice * FUE_VALS.selfservice).toFixed(3);
+
+      // Deduplicate by date: keep the one with more users
+      if (snapshots.has(dateKey)) {
+        const prev = snapshots.get(dateKey);
+        if (totalUsers <= prev.users) continue;
+      }
+
+      snapshots.set(dateKey, { date: dateKey, fue: fueTotal, users: totalUsers });
+    } catch (e) {
+      console.warn(`Error procesando ${archivo.name}:`, e);
+      continue;
+    }
+  }
+
+  return [...snapshots.values()]
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .map(s => ({ month: formatHistDate(s.date), fue: s.fue }));
+}
+
 // ── SHAREPOINT ────────────────────────────────────────────
 let spHeaders = null, spSiteId = null;
 
