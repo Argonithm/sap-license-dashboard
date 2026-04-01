@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SAP License Monitor · FUE Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne+Mono&family=Syne:wght@400;600;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@3.27.0/lib/msal-browser.min.js"></script>
+<style>
+  :root {
+    --bg:#0a0c10;--surface:#111318;--surface2:#181c24;--border:#1f2535;
+    --accent:#00e5ff;--accent2:#ff6b35;--accent3:#7bed9f;--warn:#ffd32a;
+    --text:#e8ecf4;--muted:#5a6480;--danger:#ff4757;
+    --adv:#00e5ff;--cor:#7bed9f;--ss:#ff6b35;
+    --fh:'Syne',sans-serif;--fm:'Syne Mono',monospace;--fb:'DM Sans',sans-serif;--r:10px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100vh;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+
+  header{position:sticky;top:0;z-index:100;background:rgba(10,12,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:12px;font-family:var(--fh);font-weight:800;font-size:15px;letter-spacing:.05em;text-transform:uppercase}
+  .logo-badge{background:var(--accent);color:var(--bg);font-family:var(--fm);font-size:11px;padding:3px 8px;border-radius:4px;letter-spacing:.1em}
+  .header-right{display:flex;align-items:center;gap:14px}
+  .status-dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3);animation:pd 2s ease-in-out infinite}
+  @keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+  .last-update{font-size:12px;color:var(--muted);font-family:var(--fm)}
+  .btn-hd{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:var(--fb);font-size:13px;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .2s}
+  .btn-hd:hover{border-color:var(--accent);color:var(--accent)}
+  .btn-hd.connected{border-color:var(--accent3);color:var(--accent3)}
+
+  main{position:relative;z-index:1;padding:32px;max-width:1440px;margin:0 auto}
+  .section-label{font-family:var(--fm);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+  .banner{border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.6}
+  .banner-warn{background:rgba(255,211,42,.08);border:1px solid rgba(255,211,42,.25)}
+  .banner-info{background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.2)}
+  .banner-err{background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.3)}
+  .banner a,.banner-warn a{color:var(--warn);text-decoration:underline;cursor:pointer}
+  .banner-info a{color:var(--accent)}
+  .banner-icon{font-size:16px;flex-shrink:0;margin-top:2px}
+  .banner ul{margin:6px 0 0 18px;color:var(--muted)}
+  .banner ul li{margin-bottom:2px}
+  .banner code{font-family:var(--fm);font-size:11px;background:rgba(255,255,255,.07);padding:1px 5px;border-radius:3px;color:var(--accent)}
+
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+  .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;position:relative;overflow:hidden;transition:border-color .2s}
+  .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ca,var(--accent))}
+  .kpi-card:hover{border-color:var(--ca,var(--accent))}
+  .kpi-label{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+  .kpi-value{font-family:var(--fm);font-size:36px;color:var(--ca,var(--accent));line-height:1;letter-spacing:-.02em}
+  .kpi-sub{font-size:12px;color:var(--muted);margin-top:6px}
+  .kpi-delta{position:absolute;top:20px;right:20px;font-family:var(--fm);font-size:11px;padding:3px 7px;border-radius:4px}
+  .du{background:rgba(123,237,159,.15);color:var(--accent3)}
+  .dd{background:rgba(255,71,87,.15);color:var(--danger)}
+  .dw{background:rgba(255,211,42,.15);color:var(--warn)}
+
+  .charts-grid{display:grid;grid-template-columns:1fr 380px;gap:20px;margin-bottom:32px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;transition:border-color .2s}
+  .card:hover{border-color:rgba(0,229,255,.2)}
+  .card-title{font-family:var(--fh);font-size:14px;font-weight:600;margin-bottom:4px}
+  .card-sub{font-size:12px;color:var(--muted);margin-bottom:20px}
+
+  .gauge-wrap{position:relative;width:200px;height:200px;margin:0 auto 16px}
+  .gauge-wrap canvas{width:200px!important;height:200px!important}
+  .gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+  .gauge-pct{font-family:var(--fm);font-size:32px}
+  .gauge-lbl{font-size:11px;color:var(--muted);margin-top:2px}
+  .fue-breakdown{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .fue-row{display:flex;align-items:center;gap:10px}
+  .fue-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .fue-name{font-size:12px;color:var(--muted);flex:1}
+  .fue-bar-w{flex:2;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+  .fue-bar{height:100%;border-radius:2px;transition:width .8s cubic-bezier(.23,1,.32,1)}
+  .fue-val{font-family:var(--fm);font-size:12px;width:50px;text-align:right}
+
+  .donut-wrap{position:relative;width:180px;height:180px;margin:0 auto 20px}
+  .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+  .donut-total{font-family:var(--fm);font-size:24px}
+  .donut-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+  .legend{display:flex;flex-direction:column;gap:10px}
+  .legend-item{display:flex;align-items:center;gap:10px}
+  .legend-color{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+  .legend-name{font-size:13px;flex:1}
+  .legend-count{font-family:var(--fm);font-size:13px;color:var(--muted)}
+  .legend-pct{font-family:var(--fm);font-size:11px;color:var(--muted)}
+
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:11px;font-family:var(--fm);padding:4px 10px;border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap}
+  .chip.active{border-color:var(--accent);color:var(--accent);background:rgba(0,229,255,.08)}
+  .search-input{background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:var(--fb);font-size:13px;padding:6px 12px;border-radius:6px;outline:none;width:220px;transition:border-color .2s}
+  .search-input::placeholder{color:var(--muted)}
+  .search-input:focus{border-color:var(--accent)}
+  .data-table{width:100%;border-collapse:collapse;font-size:13px}
+  .data-table th{text-align:left;font-size:10px;font-family:var(--fm);letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:8px 12px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+  .data-table th:hover{color:var(--accent)}
+  .data-table td{padding:10px 12px;border-bottom:1px solid rgba(31,37,53,.6)}
+  .data-table tr:hover td{background:rgba(0,229,255,.03)}
+  .data-table tr:last-child td{border-bottom:none}
+  .badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-family:var(--fm);letter-spacing:.05em}
+  .b-adv{background:rgba(0,229,255,.12);color:var(--adv)}
+  .b-cor{background:rgba(123,237,159,.12);color:var(--cor)}
+  .b-ss{background:rgba(255,107,53,.12);color:var(--ss)}
+  .b-act{background:rgba(123,237,159,.12);color:var(--accent3)}
+  .b-ina{background:rgba(255,71,87,.12);color:var(--danger)}
+  .fue-chip{font-family:var(--fm);font-size:12px;font-weight:600}
+  .login-muted{font-size:11px;color:var(--muted)}
+  .login-warn{font-size:11px;color:var(--danger)}
+
+  /* MODAL */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+  .modal-overlay.open{opacity:1;pointer-events:auto}
+  .modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px;width:580px;max-width:95vw;transform:translateY(20px);transition:transform .3s;max-height:90vh;overflow-y:auto}
+  .modal-overlay.open .modal{transform:translateY(0)}
+  .modal-title{font-family:var(--fh);font-size:18px;font-weight:700;margin-bottom:6px}
+  .modal-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
+  .field-label{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;display:block}
+  .field-input{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:var(--fm);font-size:12px;padding:10px 14px;border-radius:6px;outline:none;margin-bottom:16px;transition:border-color .2s}
+  .field-input:focus{border-color:var(--accent)}
+  .divider{height:1px;background:var(--border);margin:16px 0}
+  .step{display:flex;gap:12px;margin-bottom:10px;font-size:12px;color:var(--muted);line-height:1.5}
+  .step-num{font-family:var(--fm);font-size:10px;color:var(--accent);background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.2);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .step strong{color:var(--text)}
+  .step code{font-family:var(--fm);font-size:11px;background:rgba(255,255,255,.06);padding:1px 5px;border-radius:3px;color:var(--accent)}
+  .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+  .btn-primary{background:var(--accent);color:var(--bg);font-family:var(--fh);font-weight:600;font-size:13px;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;transition:opacity .2s}
+  .btn-primary:hover{opacity:.85}
+  .btn-secondary{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:var(--fb);font-size:13px;padding:10px 20px;border-radius:6px;cursor:pointer;transition:all .2s}
+  .btn-secondary:hover{border-color:var(--muted);color:var(--text)}
+
+  .loading-overlay{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:300;transition:opacity .5s}
+  .loading-overlay.hidden{opacity:0;pointer-events:none}
+  .spinner{width:40px;height:40px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:16px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loading-text{font-family:var(--fm);font-size:12px;color:var(--muted)}
+
+  .fb-item{display:flex;align-items:center;gap:10px;padding:7px 12px;cursor:pointer;font-size:12px;transition:background .15s}
+  .fb-item:hover{background:rgba(0,229,255,.06)}
+  .fb-item-icon{font-size:14px;flex-shrink:0;width:20px;text-align:center}
+  .fb-item-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .fb-item-size{font-family:var(--fm);font-size:10px;color:var(--muted)}
+  .fb-item.is-file .fb-item-name{color:var(--accent)}
+  .fb-back{color:var(--muted);font-size:11px;border-bottom:1px solid var(--border)}
+
+  @media(max-width:1100px){.charts-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){main{padding:16px}.kpi-grid{grid-template-columns:1fr 1fr}header{padding:0 16px}}
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text" id="loadingText">Iniciando dashboard...</div>
+</div>
+
+<header>
+  <div class="logo"><span class="logo-badge">SAP</span>License Monitor</div>
+  <div class="header-right">
+    <div class="status-dot"></div>
+    <span class="last-update" id="lastUpdate">—</span>
+    <button class="btn-hd" id="btnSession" onclick="handleSessionBtn()">⚙ Configurar</button>
+  </div>
+</header>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-title">Conectar a SharePoint</div>
+    <div class="modal-sub">Autenticación con MSAL.js — el usuario inicia sesión con su cuenta Microsoft. No se requiere Client Secret en el navegador.</div>
+
+    <div class="banner banner-info" style="margin-bottom:16px">
+      <span class="banner-icon">ℹ</span>
+      <div><strong>Configuración única en Azure AD:</strong><br>
+      Registra una app → agrega permisos <code>Sites.Read.All</code> y <code>Files.Read.All</code> (delegados, con admin consent) → en <em>Authentication</em> agrega la URL de este archivo como <strong>Redirect URI</strong> de tipo <strong>Single-page application (SPA)</strong>.</div>
+    </div>
+
+    <label class="field-label">Client ID (Application ID)</label>
+    <div class="step"><div class="step-num">→</div><div class="step">Azure Portal → App Registrations → tu app → <strong>Overview → Application (client) ID</strong></div></div>
+    <input class="field-input" id="cfgClientId" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"/>
+
+    <label class="field-label">Tenant ID (Directory ID)</label>
+    <div class="step"><div class="step-num">→</div><div class="step">Azure Portal → Azure Active Directory → <strong>Overview → Tenant ID</strong></div></div>
+    <input class="field-input" id="cfgTenantId" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"/>
+
+    <div class="divider"></div>
+
+    <label class="field-label">SharePoint Site URL</label>
+    <input class="field-input" id="cfgSiteUrl" placeholder="https://tuempresa.sharepoint.com/sites/nombre-sitio"/>
+
+    <label class="field-label">Ruta del archivo Excel</label>
+    <div class="step"><div class="step-num">→</div><div class="step">Relativa a la raíz del drive. Haz clic en <strong>Explorar</strong> para buscar el archivo.</div></div>
+    <div style="display:flex;gap:8px;margin-bottom:16px">
+      <input class="field-input" id="cfgFilePath" placeholder="Licencias/Salida/SLIM_UCH_FUE.xlsx" style="margin-bottom:0;flex:1"/>
+      <button class="btn-secondary" onclick="browseFiles()" id="btnBrowse" style="white-space:nowrap;height:42px">📂 Explorar</button>
+    </div>
+    <div id="fileBrowser" style="display:none;max-height:250px;overflow-y:auto;background:var(--surface2);border:1px solid var(--border);border-radius:6px;margin-bottom:16px">
+      <div id="fileBrowserPath" style="padding:8px 12px;font-family:var(--fm);font-size:11px;color:var(--accent);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px">
+        <span id="fileBrowserCrumb">/</span>
+      </div>
+      <div id="fileBrowserList" style="padding:4px 0"></div>
+      <div id="fileBrowserLoading" style="padding:12px;text-align:center;font-size:12px;color:var(--muted);display:none">Cargando...</div>
+    </div>
+
+    <label class="field-label">FUEs Contratadas (presupuesto)</label>
+    <input class="field-input" id="cfgBudget" type="number" placeholder="Ej: 150"/>
+
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-primary" onclick="saveAndConnect()">Guardar y conectar</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="banner banner-warn" id="bannerDemo" style="display:none">
+    <span class="banner-icon">⚡</span>
+    <span>Modo demo activo — datos simulados. <a onclick="openModal()">Configura tu conexión a SharePoint</a> para ver datos reales.</span>
+  </div>
+  <div class="banner banner-info" id="bannerOk" style="display:none">
+    <span class="banner-icon">✓</span>
+    <span id="bannerOkText"></span>
+  </div>
+  <div class="banner banner-err" id="bannerErr" style="display:none">
+    <span class="banner-icon">✕</span>
+    <div id="bannerErrText"></div>
+  </div>
+
+  <div class="section-label">Indicadores clave</div>
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--ca:var(--accent)">
+      <div class="kpi-label">FUE Consumidas</div>
+      <div class="kpi-value" id="kFue">—</div>
+      <div class="kpi-sub" id="kFueSub">de — contratadas</div>
+      <div class="kpi-delta" id="kFueDelta"></div>
+    </div>
+    <div class="kpi-card" style="--ca:var(--accent3)">
+      <div class="kpi-label">Usuarios Totales</div>
+      <div class="kpi-value" id="kUsers">—</div>
+      <div class="kpi-sub" id="kUsersSub">en el sistema</div>
+    </div>
+    <div class="kpi-card" style="--ca:var(--warn)">
+      <div class="kpi-label">Usuarios Inactivos</div>
+      <div class="kpi-value" id="kInactive">—</div>
+      <div class="kpi-sub">sin login hace +90 días</div>
+      <div class="kpi-delta dw" id="kInactivePct"></div>
+    </div>
+    <div class="kpi-card" style="--ca:var(--accent2)">
+      <div class="kpi-label">FUE Recuperables</div>
+      <div class="kpi-value" id="kRecoverable">—</div>
+      <div class="kpi-sub">de usuarios inactivos</div>
+    </div>
+  </div>
+
+  <div class="section-label">Análisis de consumo</div>
+  <div class="charts-grid">
+    <div class="card">
+      <div class="card-title">Evolución histórica del consumo FUE</div>
+      <div class="card-sub">Tendencia mensual vs. presupuesto contratado</div>
+      <canvas id="lineChart" height="240"></canvas>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="card" style="flex:1">
+        <div class="card-title">FUE vs. Presupuesto</div>
+        <div class="card-sub">Utilización actual del contrato</div>
+        <div class="gauge-wrap">
+          <canvas id="gaugeChart"></canvas>
+          <div class="gauge-center">
+            <div class="gauge-pct" id="gaugePct">—</div>
+            <div class="gauge-lbl">utilización</div>
+          </div>
+        </div>
+        <div class="fue-breakdown" id="fueBreakdown"></div>
+      </div>
+      <div class="card" style="flex:1">
+        <div class="card-title">Distribución por licencia</div>
+        <div class="card-sub">Usuarios por tipo</div>
+        <div class="donut-wrap">
+          <canvas id="donutChart"></canvas>
+          <div class="donut-center">
+            <div class="donut-total" id="donutTotal">—</div>
+            <div class="donut-lbl">usuarios</div>
+          </div>
+        </div>
+        <div class="legend" id="donutLegend"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Detalle de usuarios</div>
+  <div class="card">
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div>
+          <div class="card-title">Listado completo</div>
+          <div style="font-size:12px;color:var(--muted)" id="tableCount">— usuarios</div>
+        </div>
+        <input class="search-input" id="searchInput" placeholder="Buscar usuario o nombre..." oninput="renderTable()"/>
+      </div>
+      <div class="filter-row">
+        <span class="chip active" onclick="setFilter('all',this)">Todos</span>
+        <span class="chip" onclick="setFilter('Advanced',this)">Advanced</span>
+        <span class="chip" onclick="setFilter('Core',this)">Core</span>
+        <span class="chip" onclick="setFilter('Self-Service',this)">Self-Service</span>
+        <span class="chip" onclick="setFilter('Sin clasificar',this)">Sin clasificar</span>
+        <span class="chip" onclick="setFilter('Externo',this)">Externos</span>
+        <span class="chip" onclick="setFilter('inactive',this)">⚠ Inactivos +90d</span>
+      </div>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="data-table">
+        <thead><tr>
+          <th onclick="sort('user')">Usuario ↕</th>
+          <th onclick="sort('name')">Nombre ↕</th>
+          <th onclick="sort('licenseType')">Tipo de Licencia ↕</th>
+          <th onclick="sort('status')">Estado ↕</th>
+          <th onclick="sort('fue')">FUE ↕</th>
+          <th onclick="sort('lastLogin')">Último Login ↕</th>
+        </tr></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script>
+// ── CONSTANTS ─────────────────────────────────────────────
+const FUE_MAP = { 'Advanced':1, 'Core':0.2, 'Self-Service':0.033 };
+const SCOPES  = ['https://graph.microsoft.com/Sites.Read.All','https://graph.microsoft.com/Files.Read.All'];
+
+// ── STATE ─────────────────────────────────────────────────
+let CFG = JSON.parse(localStorage.getItem('sap_fue_cfg2') || '{}');
+let msalApp = null;
+let allData = [], activeFilter = 'all', sortCol = 'user', sortDir = 1;
+let lineChart, gaugeChart, donutChart;
+
+// ── MSAL ──────────────────────────────────────────────────
+async function initMsal() {
+  msalApp = new msal.PublicClientApplication({
+    auth: {
+      clientId:    CFG.clientId,
+      authority:   `https://login.microsoftonline.com/${CFG.tenantId}`,
+      redirectUri: window.location.href.split('?')[0].split('#')[0]
+    },
+    cache: { cacheLocation:'localStorage', storeAuthStateInCookie:false }
+  });
+  await msalApp.initialize();
+  // Procesar respuestas de auth pendientes (necesario para MSAL Browser)
+  await msalApp.handleRedirectPromise();
+}
+
+async function getToken() {
+  const accounts = msalApp.getAllAccounts();
+  if (accounts.length > 0) {
+    try {
+      const r = await msalApp.acquireTokenSilent({ scopes: SCOPES, account: accounts[0] });
+      return r.accessToken;
+    } catch {
+      // Silent falló (token expirado, etc.) — intentar popup
+    }
+  }
+  const r = await msalApp.acquireTokenPopup({ scopes: SCOPES });
+  return r.accessToken;
+}
+
+// ── GRAPH HELPERS ─────────────────────────────────────────
+async function graphFetch(url, headers, step) {
+  let resp;
+  try {
+    resp = await fetch(url, { headers });
+  } catch (e) {
+    throw { step, code:'NETWORK', detail:`No se pudo conectar a Microsoft Graph. Verifica tu conexión a internet.`, url, raw:e.message };
+  }
+  if (!resp.ok) {
+    let body = '';
+    try { const j = await resp.json(); body = j.error?.message || JSON.stringify(j.error||j); } catch { body = await resp.text().catch(()=>''); }
+    throw { step, code:resp.status, detail:body, url };
+  }
+  return resp.json();
+}
+
+// ── SHAREPOINT ────────────────────────────────────────────
+let spHeaders = null, spSiteId = null;
+
+async function spConnect() {
+  // Paso 1: Token
+  setLoading('Paso 1/5 · Autenticando con Microsoft...');
+  let token;
+  try {
+    token = await getToken();
+  } catch(e) {
+    throw { step:'auth', code:'AUTH', detail: e.errorCode
+      ? `MSAL error: ${e.errorCode} — ${e.errorMessage}`
+      : `No se pudo obtener token. ¿Se cerró el popup? ¿Redirect URI correcto?`, raw:e.message||'' };
+  }
+  spHeaders = { Authorization:`Bearer ${token}` };
+
+  // Paso 2: Resolver sitio
+  setLoading('Paso 2/5 · Buscando sitio SharePoint...');
+  const url  = new URL(CFG.siteUrl);
+  const siteUrl = `https://graph.microsoft.com/v1.0/sites/${url.hostname}:${url.pathname}`;
+  const site = await graphFetch(siteUrl, spHeaders, 'site');
+  spSiteId = site.id;
+}
+
+async function fetchFromSharePoint() {
+  const headers = spHeaders;
+  const site = { id: spSiteId };
+
+  // Paso 3: Buscar archivo
+  setLoading('Paso 3/5 · Localizando archivo Excel...');
+  const fp   = CFG.filePath.replace(/^\//, '');
+  const fileUrl = `https://graph.microsoft.com/v1.0/sites/${site.id}/drive/root:/${fp}`;
+  const item = await graphFetch(fileUrl, headers, 'file');
+  const did  = item.parentReference.driveId;
+
+  // Paso 4: Leer tablas del workbook
+  setLoading('Paso 4/5 · Leyendo tabla de licencias...');
+  const base = `https://graph.microsoft.com/v1.0/sites/${site.id}/drives/${did}/items/${item.id}/workbook/tables`;
+  const tabs = await graphFetch(base, headers, 'tables');
+  if (!tabs.value?.length) {
+    throw { step:'tables', code:'EMPTY', detail:'El Excel no contiene tablas formateadas (ListObject). El Office Script debe crear la tabla SLIM_UCH_FUE_TABLE.' };
+  }
+
+  const tid  = tabs.value[0].id;
+  const [colData, rowData] = await Promise.all([
+    graphFetch(`${base}/${tid}/columns`, headers, 'columns'),
+    graphFetch(`${base}/${tid}/rows`,    headers, 'rows')
+  ]);
+  const cols = colData.value.map(c => c.name.toLowerCase().trim());
+  const rows = rowData.value;
+
+  if (!rows.length) {
+    throw { step:'rows', code:'EMPTY', detail:'La tabla existe pero no tiene filas de datos.' };
+  }
+
+  // Helper: busca valor por posibles nombres de columna (lowercase)
+  function col(obj, ...keys) {
+    for (const k of keys) { if (obj[k] !== undefined && obj[k] !== null) return obj[k]; }
+    return '';
+  }
+
+  // Normalizar tipo licencia: "GB Advanced Use" → "Advanced", "GC Core Use" → "Core", etc.
+  function parseType(raw) {
+    const s = String(raw).toLowerCase();
+    if (s.includes('advanced')) return 'Advanced';
+    if (s.includes('core'))     return 'Core';
+    if (s.includes('self'))     return 'Self-Service';
+    return String(raw) || 'Sin clasificar';
+  }
+
+  // Normalizar estado: "ACTIVOS" → Activo, "EXTERNOS"/"TECNICOS" → Externo/Técnico, resto → Inactivo
+  function parseStatus(raw) {
+    const s = String(raw).toLowerCase();
+    if (s.includes('activo')) return 'Activo';
+    if (s.includes('externo')) return 'Externo';
+    if (s.includes('tecnico') || s.includes('técnico')) return 'Técnico';
+    return 'Inactivo';
+  }
+
+  // Parsear fechas dd-MM-yyyy o yyyy-MM-dd o número serial Excel
+  function parseDate(raw) {
+    if (!raw) return null;
+    const s = String(raw).trim();
+    if (!s) return null;
+    // Número serial Excel (días desde 1900-01-01)
+    if (/^\d{4,5}(\.\d+)?$/.test(s)) {
+      const d = new Date(Date.UTC(1899,11,30 + Math.floor(Number(s))));
+      return isNaN(d) ? null : d;
+    }
+    // dd-MM-yyyy o dd/MM/yyyy
+    const dmy = s.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+    if (dmy) {
+      const d = new Date(Number(dmy[3]), Number(dmy[2])-1, Number(dmy[1]));
+      return isNaN(d) ? null : d;
+    }
+    // ISO o cualquier otro formato
+    const d = new Date(s);
+    return isNaN(d) ? null : d;
+  }
+
+  return rows.map(row => {
+    const v = row.values[0], obj = {};
+    cols.forEach((c,i) => obj[c] = v[i]);
+
+    const typeKey  = parseType(col(obj, 'tipo licencia','tipo de licencia','tipo','licensetype','license type'));
+    const status   = parseStatus(col(obj, 'estado','status'));
+    const loginD   = parseDate(col(obj, 'ultimo login','último login','lastlogin','last login'));
+    const days     = loginD ? Math.floor((Date.now()-loginD)/86400000) : 999;
+
+    return {
+      user:        String(col(obj, 'usuario','user')),
+      name:        String(col(obj, 'nombre completo','nombre','name')),
+      licenseType: typeKey,
+      status:      status,
+      fue:         FUE_MAP[typeKey] ?? 0,
+      lastLogin:   loginD ? loginD.toISOString().split('T')[0] : '—',
+      daysInactive:days
+    };
+  });
+}
+
+// ── HISTORICAL DATA ──────────────────────────────────────
+async function fetchHistorical(headers, siteId) {
+  // Buscar SLIM_UCH_HISTORICO.xlsx en la misma carpeta que el archivo principal
+  const folder = CFG.filePath.substring(0, CFG.filePath.lastIndexOf('/'));
+  const histPath = folder ? `${folder}/SLIM_UCH_HISTORICO.xlsx` : 'SLIM_UCH_HISTORICO.xlsx';
+
+  let item;
+  try {
+    item = await graphFetch(`https://graph.microsoft.com/v1.0/sites/${siteId}/drive/root:/${histPath}`, headers, 'hist-file');
+  } catch {
+    console.log('Archivo histórico no encontrado, usando datos del snapshot actual.');
+    return null;
+  }
+
+  const did  = item.parentReference.driveId;
+  const base = `https://graph.microsoft.com/v1.0/sites/${siteId}/drives/${did}/items/${item.id}/workbook`;
+
+  // Intentar leer como tabla primero, si no como rango usado
+  let cols, rows;
+  try {
+    const tabs = await graphFetch(`${base}/tables`, headers, 'hist-tables');
+    if (tabs.value?.length) {
+      const tid = tabs.value[0].id;
+      const [cR, rR] = await Promise.all([
+        graphFetch(`${base}/tables/${tid}/columns`, headers, 'hist-cols'),
+        graphFetch(`${base}/tables/${tid}/rows`,    headers, 'hist-rows')
+      ]);
+      cols = cR.value.map(c => c.name.toLowerCase().trim());
+      rows = rR.value;
+    }
+  } catch {}
+
+  // Si no hay tabla, leer el rango usado del sheet
+  if (!cols || !rows) {
+    try {
+      const range = await graphFetch(`${base}/worksheets('Historico')/usedRange`, headers, 'hist-range');
+      if (range.values && range.values.length > 1) {
+        cols = range.values[0].map(c => String(c).toLowerCase().trim());
+        rows = range.values.slice(1).map(v => ({ values: [v] }));
+      }
+    } catch {
+      return null;
+    }
+  }
+
+  if (!cols || !rows || !rows.length) return null;
+
+  return rows.map(row => {
+    const v = row.values[0], obj = {};
+    cols.forEach((c, i) => obj[c] = v[i]);
+    return {
+      date:      String(obj['fecha'] || ''),
+      advanced:  Number(obj['advanced'] || 0),
+      core:      Number(obj['core'] || 0),
+      ss:        Number(obj['self-service'] || 0),
+      sc:        Number(obj['sin clasificar'] || 0),
+      users:     Number(obj['total usuarios'] || 0),
+      fue:       Number(obj['fue total'] || 0)
+    };
+  }).filter(r => r.date).sort((a, b) => a.date.localeCompare(b.date));
+}
+
+// ── DEMO DATA ─────────────────────────────────────────────
+function demoData() {
+  const types = ['Advanced','Advanced','Core','Core','Core','Core','Self-Service','Self-Service','Self-Service','Self-Service'];
+  const fn = ['Carlos','María','José','Ana','Luis','Paula','Jorge','Valentina','Felipe','Camila','Sebastián','Daniela','Rodrigo','Isidora'];
+  const ln = ['González','Rodríguez','Martínez','López','Sánchez','Pérez','García','Torres','Ramírez','Flores','Muñoz','Vargas'];
+  return Array.from({length:82},(_,i) => {
+    const t = types[Math.floor(Math.random()*types.length)];
+    const d = Math.floor(Math.random()*400);
+    const l = new Date(); l.setDate(l.getDate()-d);
+    return { user:`USR${String(i+1).padStart(4,'0')}`, name:`${fn[~~(Math.random()*fn.length)]} ${ln[~~(Math.random()*ln.length)]}`, licenseType:t, status:Math.random()>.18?'Activo':'Inactivo', fue:FUE_MAP[t], lastLogin:l.toISOString().split('T')[0], daysInactive:d };
+  });
+}
+function demoHistorical(b) {
+  const m = ['Ago 24','Sep 24','Oct 24','Nov 24','Dic 24','Ene 25','Feb 25','Mar 25'];
+  const base = b*.68;
+  return m.map((mo,i) => ({ month:mo, fue:+(base+i*(b*.025)+(Math.random()-.4)*b*.04).toFixed(2) }));
+}
+
+// ── RENDER DASHBOARD ──────────────────────────────────────
+function renderDashboard(data, budget, hist) {
+  allData = data;
+  const tot  = +data.reduce((s,r)=>s+r.fue,0).toFixed(3);
+  const ina  = data.filter(r=>r.daysInactive>=90);
+  const rec  = +ina.reduce((s,r)=>s+r.fue,0).toFixed(3);
+  const pct  = budget>0 ? tot/budget*100 : 0;
+
+  // KPIs
+  document.getElementById('kFue').textContent = tot.toFixed(1);
+  document.getElementById('kFueSub').textContent = `de ${budget||'—'} contratadas`;
+  const kd = document.getElementById('kFueDelta');
+  if (budget>0) {
+    const rem = (budget-tot).toFixed(1);
+    kd.className = 'kpi-delta '+(rem<0?'dd':pct>85?'dw':'du');
+    kd.textContent = (rem>=0?'+':'')+rem+' libres';
+  }
+  document.getElementById('kUsers').textContent = data.length;
+  document.getElementById('kUsersSub').textContent = `${data.filter(r=>r.status==='Activo').length} activos / ${data.filter(r=>r.status==='Inactivo').length} inactivos`;
+  document.getElementById('kInactive').textContent = ina.length;
+  document.getElementById('kInactivePct').textContent = data.length ? (ina.length/data.length*100).toFixed(0)+'% del total' : '';
+  document.getElementById('kRecoverable').textContent = rec;
+
+  // Gauge
+  document.getElementById('gaugePct').textContent = pct.toFixed(0)+'%';
+  const gc = pct<70?'#7bed9f':pct<90?'#ffd32a':'#ff4757';
+  if (gaugeChart) gaugeChart.destroy();
+  gaugeChart = new Chart(document.getElementById('gaugeChart'),{
+    type:'doughnut',
+    data:{datasets:[{data:[Math.min(pct,100),Math.max(0,100-Math.min(pct,100))],backgroundColor:[gc,'#1f2535'],borderWidth:0,borderRadius:4}]},
+    options:{cutout:'75%',rotation:-90,circumference:180,plugins:{legend:{display:false},tooltip:{enabled:false}},animation:{duration:1200,easing:'easeOutQuart'}}
+  });
+
+  // Breakdown
+  const by={};
+  data.forEach(r=>{by[r.licenseType]=(by[r.licenseType]||0)+r.fue;});
+  const tc={'Advanced':'var(--adv)','Core':'var(--cor)','Self-Service':'var(--ss)'};
+  document.getElementById('fueBreakdown').innerHTML=Object.entries(by).map(([t,v])=>`
+    <div class="fue-row">
+      <div class="fue-dot" style="background:${tc[t]||'#888'}"></div>
+      <div class="fue-name">${t}</div>
+      <div class="fue-bar-w"><div class="fue-bar" style="width:${tot>0?v/tot*100:0}%;background:${tc[t]||'#888'}"></div></div>
+      <div class="fue-val">${v.toFixed(2)}</div>
+    </div>`).join('');
+
+  // Donut
+  const dc={};
+  data.forEach(r=>{dc[r.licenseType]=(dc[r.licenseType]||0)+1;});
+  const dL=Object.keys(dc);
+  const dC=dL.map(t=>({'Advanced':'#00e5ff','Core':'#7bed9f','Self-Service':'#ff6b35'}[t]||'#888'));
+  document.getElementById('donutTotal').textContent=data.length;
+  if (donutChart) donutChart.destroy();
+  donutChart=new Chart(document.getElementById('donutChart'),{
+    type:'doughnut',
+    data:{labels:dL,datasets:[{data:dL.map(t=>dc[t]),backgroundColor:dC,borderWidth:0,borderRadius:4,hoverOffset:8}]},
+    options:{cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.parsed} usuarios (${(ctx.parsed/data.length*100).toFixed(0)}%)`}}},animation:{duration:1000,easing:'easeOutQuart'}}
+  });
+  document.getElementById('donutLegend').innerHTML=dL.map((t,i)=>`
+    <div class="legend-item">
+      <div class="legend-color" style="background:${dC[i]}"></div>
+      <div class="legend-name">${t}</div>
+      <div class="legend-count">${dc[t]}</div>
+      <div class="legend-pct">${(dc[t]/data.length*100).toFixed(0)}%</div>
+    </div>`).join('');
+
+  // Line
+  Chart.defaults.color='#5a6480'; Chart.defaults.font.family="'DM Sans',sans-serif";
+  if (lineChart) lineChart.destroy();
+  lineChart=new Chart(document.getElementById('lineChart'),{
+    type:'line',
+    data:{
+      labels:hist.map(h=>h.month),
+      datasets:[
+        {label:'FUE consumidas',data:hist.map(h=>h.fue),borderColor:'#00e5ff',backgroundColor:'rgba(0,229,255,.08)',borderWidth:2,pointRadius:4,pointBackgroundColor:'#00e5ff',fill:true,tension:0.4},
+        ...(budget>0?[{label:'Presupuesto',data:hist.map(()=>budget),borderColor:'rgba(255,71,87,.5)',borderWidth:1.5,borderDash:[6,4],pointRadius:0,fill:false}]:[])
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:true,scales:{x:{grid:{color:'#1f2535'},ticks:{font:{size:11}}},y:{grid:{color:'#1f2535'},ticks:{font:{size:11}},beginAtZero:false}},plugins:{legend:{labels:{font:{size:12},boxWidth:12,padding:16}}},animation:{duration:1200,easing:'easeOutQuart'}}
+  });
+
+  renderTable();
+  document.getElementById('lastUpdate').textContent='Act: '+new Date().toLocaleString('es-CL',{dateStyle:'short',timeStyle:'short'});
+}
+
+function renderTable() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  let rows = allData.filter(r => {
+    if (activeFilter==='inactive') return r.daysInactive>=90;
+    if (activeFilter==='Externo') return r.status==='Externo' || r.status==='Técnico';
+    if (activeFilter!=='all') return r.licenseType===activeFilter;
+    return true;
+  }).filter(r => !q||r.user.toLowerCase().includes(q)||r.name.toLowerCase().includes(q));
+  rows.sort((a,b)=>{let av=a[sortCol],bv=b[sortCol];if(sortCol==='lastLogin'){av=new Date(av);bv=new Date(bv);}return av<bv?-sortDir:av>bv?sortDir:0;});
+  const bCls=t=>({'Advanced':'b-adv','Core':'b-cor','Self-Service':'b-ss'}[t]||'');
+  document.getElementById('tableCount').textContent=`${rows.length} usuarios`;
+  document.getElementById('tableBody').innerHTML=rows.map(r=>`
+    <tr>
+      <td><span style="font-family:var(--fm);font-size:12px;color:var(--muted)">${r.user}</span></td>
+      <td>${r.name}</td>
+      <td><span class="badge ${bCls(r.licenseType)}">${r.licenseType}</span></td>
+      <td><span class="badge ${r.status==='Activo'?'b-act':r.status==='Externo'||r.status==='Técnico'?'b-cor':'b-ina'}">${r.status}</span></td>
+      <td><span class="fue-chip">${r.fue.toFixed(3)}</span></td>
+      <td>${r.lastLogin} <span class="${r.daysInactive>=90?'login-warn':'login-muted'}">${r.daysInactive>=90?'⚠ ':''}hace ${r.daysInactive}d</span></td>
+    </tr>`).join('');
+}
+
+function setFilter(f,el){activeFilter=f;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderTable();}
+function sort(col){if(sortCol===col)sortDir*=-1;else{sortCol=col;sortDir=1;}renderTable();}
+
+// ── FILE BROWSER ─────────────────────────────────────────
+let browseToken = null;
+let browseSiteId = null;
+
+async function browseFiles(folderPath) {
+  const browser  = document.getElementById('fileBrowser');
+  const list     = document.getElementById('fileBrowserList');
+  const loading  = document.getElementById('fileBrowserLoading');
+  const crumb    = document.getElementById('fileBrowserCrumb');
+  const clientId = document.getElementById('cfgClientId').value.trim();
+  const tenantId = document.getElementById('cfgTenantId').value.trim();
+  const siteUrl  = document.getElementById('cfgSiteUrl').value.trim();
+
+  if (!clientId || !tenantId || !siteUrl) {
+    alert('Completa Client ID, Tenant ID y Site URL antes de explorar.');
+    return;
+  }
+
+  browser.style.display = 'block';
+  list.innerHTML = '';
+  loading.style.display = 'block';
+
+  try {
+    // Inicializar MSAL si es necesario
+    if (!browseToken) {
+      if (!msalApp || CFG.clientId !== clientId || CFG.tenantId !== tenantId) {
+        const tempApp = new msal.PublicClientApplication({
+          auth: { clientId, authority:`https://login.microsoftonline.com/${tenantId}`, redirectUri: window.location.href.split('?')[0].split('#')[0] },
+          cache: { cacheLocation:'localStorage', storeAuthStateInCookie:false }
+        });
+        await tempApp.initialize();
+        await tempApp.handleRedirectPromise();
+        const accounts = tempApp.getAllAccounts();
+        if (accounts.length > 0) {
+          try { browseToken = (await tempApp.acquireTokenSilent({ scopes:SCOPES, account:accounts[0] })).accessToken; }
+          catch { browseToken = (await tempApp.acquireTokenPopup({ scopes:SCOPES })).accessToken; }
+        } else {
+          browseToken = (await tempApp.acquireTokenPopup({ scopes:SCOPES })).accessToken;
+        }
+      } else {
+        browseToken = await getToken();
+      }
+    }
+
+    const headers = { Authorization:`Bearer ${browseToken}` };
+
+    // Resolver siteId
+    if (!browseSiteId) {
+      const u = new URL(siteUrl);
+      const siteData = await graphFetch(`https://graph.microsoft.com/v1.0/sites/${u.hostname}:${u.pathname}`, headers, 'browse-site');
+      browseSiteId = siteData.id;
+    }
+
+    // Listar carpeta
+    const graphPath = folderPath
+      ? `https://graph.microsoft.com/v1.0/sites/${browseSiteId}/drive/root:/${folderPath}:/children`
+      : `https://graph.microsoft.com/v1.0/sites/${browseSiteId}/drive/root/children`;
+    const result = await graphFetch(graphPath, headers, 'browse-list');
+
+    crumb.textContent = '/' + (folderPath || '');
+    loading.style.display = 'none';
+
+    // Botón volver
+    let html = '';
+    if (folderPath) {
+      const parent = folderPath.includes('/') ? folderPath.substring(0, folderPath.lastIndexOf('/')) : '';
+      html += `<div class="fb-item fb-back" onclick="browseFiles('${parent}')">
+        <span class="fb-item-icon">←</span><span class="fb-item-name">Volver</span></div>`;
+    }
+
+    // Items
+    const items = result.value.sort((a,b) => {
+      if (a.folder && !b.folder) return -1;
+      if (!a.folder && b.folder) return 1;
+      return a.name.localeCompare(b.name);
+    });
+
+    for (const item of items) {
+      const isFolder = !!item.folder;
+      const itemPath = folderPath ? `${folderPath}/${item.name}` : item.name;
+      const size = item.size ? (item.size > 1048576 ? (item.size/1048576).toFixed(1)+'MB' : (item.size/1024).toFixed(0)+'KB') : '';
+      const icon = isFolder ? '📁' : item.name.endsWith('.xlsx') ? '📊' : '📄';
+      const cls  = isFolder ? '' : 'is-file';
+      const click = isFolder
+        ? `browseFiles('${itemPath}')`
+        : `selectBrowsedFile('${itemPath}')`;
+      html += `<div class="fb-item ${cls}" onclick="${click}">
+        <span class="fb-item-icon">${icon}</span>
+        <span class="fb-item-name">${item.name}</span>
+        <span class="fb-item-size">${size}</span></div>`;
+    }
+
+    if (!items.length) html += '<div style="padding:12px;text-align:center;font-size:12px;color:var(--muted)">Carpeta vacía</div>';
+    list.innerHTML = html;
+
+  } catch(e) {
+    loading.style.display = 'none';
+    list.innerHTML = `<div style="padding:12px;font-size:12px;color:var(--danger)">${e.detail || e.message || 'Error al explorar'}</div>`;
+    browseToken = null;
+    browseSiteId = null;
+  }
+}
+
+function selectBrowsedFile(path) {
+  document.getElementById('cfgFilePath').value = path;
+  document.getElementById('fileBrowser').style.display = 'none';
+  browseToken = null;
+  browseSiteId = null;
+}
+
+// ── MODAL ─────────────────────────────────────────────────
+function openModal() {
+  if (CFG.clientId) document.getElementById('cfgClientId').value=CFG.clientId;
+  if (CFG.tenantId) document.getElementById('cfgTenantId').value=CFG.tenantId;
+  if (CFG.siteUrl)  document.getElementById('cfgSiteUrl').value=CFG.siteUrl;
+  if (CFG.filePath) document.getElementById('cfgFilePath').value=CFG.filePath;
+  if (CFG.budget)   document.getElementById('cfgBudget').value=CFG.budget;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
+
+async function saveAndConnect() {
+  CFG = {
+    clientId: document.getElementById('cfgClientId').value.trim(),
+    tenantId: document.getElementById('cfgTenantId').value.trim(),
+    siteUrl:  document.getElementById('cfgSiteUrl').value.trim(),
+    filePath: document.getElementById('cfgFilePath').value.trim(),
+    budget:   parseFloat(document.getElementById('cfgBudget').value)||0
+  };
+  localStorage.setItem('sap_fue_cfg2', JSON.stringify(CFG));
+  closeModal();
+  await loadData();
+}
+
+function handleSessionBtn() {
+  if (msalApp && msalApp.getAllAccounts().length>0) {
+    if (confirm('¿Cerrar sesión de Microsoft?')) { msalApp.logoutPopup(); setSessionBtn(false); }
+  } else { openModal(); }
+}
+function setSessionBtn(on, label) {
+  const b=document.getElementById('btnSession');
+  b.textContent = on ? `● ${label||'Conectado'}` : '⚙ Configurar';
+  b.className = 'btn-hd'+(on?' connected':'');
+}
+
+// ── LOADING ───────────────────────────────────────────────
+function setLoading(msg){document.getElementById('loadingText').textContent=msg;}
+function showOverlay(v){document.getElementById('loadingOverlay').classList.toggle('hidden',!v);}
+
+// ── DATE HELPERS ─────────────────────────────────────────
+function formatHistDate(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isNaN(d)) return dateStr;
+  const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  return `${d.getDate()} ${months[d.getMonth()]} ${String(d.getFullYear()).slice(2)}`;
+}
+
+// ── BANNER HELPERS ────────────────────────────────────────
+function hideBanners(){['bannerDemo','bannerOk','bannerErr'].forEach(id=>document.getElementById(id).style.display='none');}
+function showBanner(id,html){hideBanners();const el=document.getElementById(id);el.style.display='flex';const txt=el.querySelector('[id$="Text"]');if(txt&&html)txt.innerHTML=html;}
+
+// ── LOAD DATA ─────────────────────────────────────────────
+const MAX_RETRIES = 3;
+const RETRY_DELAYS = [5000, 10000, 20000]; // 5s, 10s, 20s
+
+async function loadData(retryCount = 0) {
+  showOverlay(true); hideBanners();
+  const isDemo = !CFG.clientId||!CFG.tenantId||!CFG.siteUrl||!CFG.filePath;
+  const budget = CFG.budget||150;
+
+  try {
+    let data, hist;
+    if (isDemo) {
+      setLoading('Cargando datos de demostración...');
+      await new Promise(r=>setTimeout(r,600));
+      data = demoData(); hist = demoHistorical(budget);
+      showBanner('bannerDemo');
+      setSessionBtn(false);
+    } else {
+      await initMsal();
+      await spConnect();
+      data = await fetchFromSharePoint();
+      // Paso 5: Leer histórico
+      setLoading('Paso 5/5 · Cargando datos históricos...');
+      const histData = await fetchHistorical(spHeaders, spSiteId);
+      if (histData && histData.length) {
+        // Agregar snapshot actual al final si no está
+        const today = new Date().toISOString().split('T')[0];
+        const totalFue = +data.reduce((s,r)=>s+r.fue,0).toFixed(3);
+        const last = histData[histData.length-1];
+        if (last.date !== today) {
+          histData.push({ date:today, fue:totalFue });
+        }
+        hist = histData.map(h => ({
+          month: formatHistDate(h.date),
+          fue: h.fue
+        }));
+      } else {
+        hist = demoHistorical(budget);
+      }
+      const acct = msalApp.getAllAccounts()[0];
+      setSessionBtn(true, acct?.username);
+      showBanner('bannerOk', `Conectado como <strong>${acct?.username||'usuario'}</strong> · ${data.length} usuarios cargados desde SharePoint.`);
+    }
+    renderDashboard(data, budget, hist);
+  } catch(err) {
+    console.error('Dashboard error:', err);
+    const e = err.step ? err : { step:'unknown', code:'ERR', detail:err.message||String(err) };
+
+    // Retry automático para errores de archivo/tablas/red (el Excel puede estar recreándose)
+    const retryableSteps = ['file','tables','columns','rows'];
+    const retryableCodes = ['NETWORK', 404, 423, 500, 502, 503, 504];
+    const canRetry = retryCount < MAX_RETRIES
+      && (retryableSteps.includes(e.step) || retryableCodes.includes(e.code));
+
+    if (canRetry) {
+      const delay = RETRY_DELAYS[retryCount] || 20000;
+      const secs  = Math.round(delay/1000);
+      console.log(`Retry ${retryCount+1}/${MAX_RETRIES} en ${secs}s...`);
+      showBanner('bannerErr', `
+        <strong>Archivo no disponible</strong> — es posible que se esté regenerando desde SAP.<br>
+        <span style="color:var(--muted)">Reintentando automáticamente en <strong id="retryCountdown">${secs}</strong> segundos (intento ${retryCount+1}/${MAX_RETRIES})...</span>`);
+      // Countdown visual
+      let remaining = secs;
+      const cdInterval = setInterval(()=>{
+        remaining--;
+        const el = document.getElementById('retryCountdown');
+        if (el) el.textContent = remaining;
+        if (remaining <= 0) clearInterval(cdInterval);
+      }, 1000);
+      await new Promise(r=>setTimeout(r, delay));
+      clearInterval(cdInterval);
+      showOverlay(false);
+      return loadData(retryCount + 1);
+    }
+
+    // Sin más reintentos — mostrar error detallado
+    const stepLabels = { auth:'Autenticación', site:'Sitio SharePoint', file:'Archivo Excel', tables:'Tablas del Workbook', columns:'Columnas', rows:'Filas' };
+    const stepFixes  = {
+      auth: `<li>Verifica que el <strong>Client ID</strong> y <strong>Tenant ID</strong> sean correctos</li>
+             <li>El <strong>Redirect URI</strong> en Azure (tipo SPA) debe ser exactamente: <code>${location.href.split('?')[0].split('#')[0]}</code></li>
+             <li>Si se cerró un popup, intenta de nuevo</li>`,
+      site: `<li>URL configurada: <code>${CFG.siteUrl||'(vacía)'}</code></li>
+             <li>Verifica que el sitio exista y tu cuenta tenga acceso</li>
+             <li>El permiso <code>Sites.Read.All</code> delegado debe tener <strong>admin consent</strong></li>`,
+      file: `<li>Ruta configurada: <code>${CFG.filePath||'(vacía)'}</code></li>
+             <li>Verifica que el archivo exista en SharePoint en esa ubicación</li>
+             <li>Si ejecutaste SLIM_UCH recientemente, el archivo puede estar regenerándose — espera unos segundos y recarga</li>
+             <li>El permiso <code>Files.Read.All</code> delegado debe tener <strong>admin consent</strong></li>`,
+      tables:`<li>El archivo Excel debe contener al menos una <strong>tabla formateada</strong> (ListObject)</li>
+              <li>El Office Script debe crear la tabla <code>SLIM_UCH_FUE_TABLE</code></li>
+              <li>Si el archivo fue recreado, Power Automate puede no haber terminado de procesarlo</li>`,
+      columns:'<li>La tabla existe pero no se pudieron leer las columnas. Verifica el formato del Excel.</li>',
+      rows:   '<li>La tabla existe pero no tiene datos. Verifica que el Office Script haya procesado el archivo.</li>'
+    };
+    const icon  = e.step==='auth' ? '🔐' : e.step==='site' ? '🌐' : e.step==='file' ? '📄' : e.step==='tables' ? '📊' : '⚠';
+    const label = stepLabels[e.step] || 'Error desconocido';
+    const fixes = stepFixes[e.step]  || '<li>Revisa la configuración y vuelve a intentar</li>';
+    const retryNote = retryCount > 0 ? `<br><span style="color:var(--muted);font-size:11px">Se reintentó ${retryCount} ${retryCount===1?'vez':'veces'} sin éxito.</span>` : '';
+    showBanner('bannerErr', `
+      <strong>${icon} Falló en: ${label}</strong><br>
+      <span style="color:var(--muted)">${e.code==='NETWORK'?'Sin conexión':e.code==='AUTH'?'Error de autenticación':`HTTP ${e.code}`}</span>
+      ${e.detail?`<br><code style="font-size:10px;word-break:break-all;display:block;margin:8px 0;padding:6px;background:rgba(0,0,0,.3);border-radius:4px">${e.detail}</code>`:''}
+      <strong>¿Cómo solucionarlo?</strong><ul>${fixes}</ul>${retryNote}`);
+    renderDashboard(demoData(), budget, demoHistorical(budget));
+  } finally {
+    showOverlay(false);
+  }
+}
+
+window.addEventListener('load', ()=>loadData());
+setInterval(()=>{ if(CFG.clientId) loadData(); }, 30*60*1000);
+</script>
+</body>
+</html>
