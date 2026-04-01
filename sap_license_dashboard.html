@@ -381,6 +381,129 @@ async function graphFetch(url, headers, step) {
   return resp.json();
 }
 
+// ── FILE LISTING ─────────────────────────────────────────
+function parseDateFromFilename(name) {
+  const m = name.match(/EXPORT_(\d{4})(\d{2})(\d{2})_(\d{6})/);
+  if (!m) return null;
+  return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+}
+
+async function listarArchivosEntrada(headers, siteId, folderPath) {
+  const url = `https://graph.microsoft.com/v1.0/sites/${siteId}/drive/root:/${folderPath}:/children?$filter=name ne 'placeholder'&$orderby=name desc`;
+  const result = await graphFetch(url, headers, 'list-files');
+
+  const excludeFiles = ['EXPORT_20251126_161021.xlsx'];
+
+  return result.value
+    .filter(item => item.name.endsWith('.xlsx') && !excludeFiles.includes(item.name))
+    .map(item => ({
+      id: item.id,
+      name: item.name,
+      driveId: item.parentReference.driveId,
+      date: parseDateFromFilename(item.name),
+      size: item.size
+    }))
+    .filter(f => f.date !== null)
+    .sort((a, b) => b.date - a.date);
+}
+
+async function descargarExcel(headers, siteId, fileInfo) {
+  const url = `https://graph.microsoft.com/v1.0/sites/${siteId}/drives/${fileInfo.driveId}/items/${fileInfo.id}/content`;
+  const resp = await fetch(url, { headers });
+  if (!resp.ok) {
+    throw { step: 'download', code: resp.status, detail: `No se pudo descargar ${fileInfo.name}` };
+  }
+  const buffer = await resp.arrayBuffer();
+  return XLSX.read(buffer, { type: 'array' });
+}
+
+function transformarArchivoCrudo(workbook) {
+  const ws = workbook.Sheets[workbook.SheetNames[0]];
+  const data = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+  if (data.length < 2) return [];
+
+  // Find header row (within first 5 rows)
+  let headerIdx = -1;
+  let colUser = -1, colName = -1, colLic = -1, colStatus = -1, colLogin = -1;
+
+  for (let i = 0; i < Math.min(5, data.length); i++) {
+    const row = data[i].map(c => String(c).toLowerCase().trim());
+    const userIdx = row.findIndex(c => c.includes('usuario') || c === 'user');
+    const licIdx = row.findIndex(c => c.includes('clasificación de destino') || c.includes('clasificacion de destino') || c.includes('clasificación destino'));
+    if (userIdx >= 0 && licIdx >= 0) {
+      headerIdx = i;
+      colUser = userIdx;
+      colName = row.findIndex(c => c.includes('nombre completo') || c.includes('nombre'));
+      colLic = licIdx;
+      colStatus = row.findIndex(c => c.includes('estado') || c === 'status');
+      colLogin = row.findIndex(c => c.includes('último login') || c.includes('ultimo login') || c.includes('last login'));
+      break;
+    }
+  }
+
+  // Fallback to Office Script column positions (A=0, B=1, E=4, H=7, I=8)
+  if (headerIdx < 0) {
+    headerIdx = 0;
+    colUser = 0;
+    colName = 1;
+    colLic = 4;
+    colStatus = 7;
+    colLogin = 8;
+  }
+
+  function parseType(raw) {
+    const s = String(raw).toLowerCase();
+    if (s.includes('advanced')) return 'Advanced';
+    if (s.includes('core'))     return 'Core';
+    if (s.includes('self'))     return 'Self-Service';
+    return String(raw) || 'Sin clasificar';
+  }
+
+  function parseStatus(raw) {
+    const s = String(raw).toLowerCase();
+    if (s.includes('activo')) return 'Activo';
+    if (s.includes('externo')) return 'Externo';
+    if (s.includes('tecnico') || s.includes('técnico')) return 'Técnico';
+    return 'Inactivo';
+  }
+
+  function parseDate(raw) {
+    if (!raw) return null;
+    if (typeof raw === 'number') {
+      const d = new Date(Date.UTC(1899, 11, 30 + Math.floor(raw)));
+      return isNaN(d) ? null : d;
+    }
+    const s = String(raw).trim();
+    if (!s) return null;
+    const dmy = s.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+    if (dmy) return new Date(Number(dmy[3]), Number(dmy[2]) - 1, Number(dmy[1]));
+    const d = new Date(s);
+    return isNaN(d) ? null : d;
+  }
+
+  const users = [];
+  for (let i = headerIdx + 1; i < data.length; i++) {
+    const row = data[i];
+    if (!row || !row[colUser]) continue;
+
+    const typeKey = parseType(colLic >= 0 ? row[colLic] : '');
+    const loginD = parseDate(colLogin >= 0 ? row[colLogin] : null);
+    const days = loginD ? Math.floor((Date.now() - loginD) / 86400000) : 999;
+
+    users.push({
+      user:         String(row[colUser] || ''),
+      name:         String(colName >= 0 ? row[colName] || '' : ''),
+      licenseType:  typeKey,
+      status:       parseStatus(colStatus >= 0 ? row[colStatus] : ''),
+      fue:          FUE_MAP[typeKey] ?? 0,
+      lastLogin:    loginD ? loginD.toISOString().split('T')[0] : '—',
+      daysInactive: days
+    });
+  }
+
+  return users;
+}
+
 // ── SHAREPOINT ────────────────────────────────────────────
 let spHeaders = null, spSiteId = null;
 
