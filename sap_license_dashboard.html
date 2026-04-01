@@ -584,7 +584,7 @@ async function construirHistorico(headers, siteId, archivos) {
 
   return [...snapshots.values()]
     .sort((a, b) => a.date.localeCompare(b.date))
-    .map(s => ({ month: formatHistDate(s.date), fue: s.fue }));
+    .map(s => ({ date: s.date, fue: s.fue }));
 }
 
 // ── SHAREPOINT ────────────────────────────────────────────
@@ -1011,7 +1011,7 @@ async function loadData(retryCount = 0) {
     }
 
     // Sin más reintentos — mostrar error detallado
-    const stepLabels = { auth:'Autenticación', site:'Sitio SharePoint', file:'Archivo Excel', tables:'Tablas del Workbook', columns:'Columnas', rows:'Filas' };
+    const stepLabels = { auth:'Autenticación', site:'Sitio SharePoint', file:'Archivo Excel', 'list-files':'Listado de archivos', download:'Descarga de archivo', tables:'Archivos válidos', columns:'Columnas', rows:'Datos de usuarios' };
     const stepFixes  = {
       auth: `<li>Verifica que el <strong>Client ID</strong> y <strong>Tenant ID</strong> sean correctos</li>
              <li>El <strong>Redirect URI</strong> en Azure (tipo SPA) debe ser exactamente: <code>${location.href.split('?')[0].split('#')[0]}</code></li>
@@ -1025,8 +1025,10 @@ async function loadData(retryCount = 0) {
              <li>El permiso <code>Files.Read.All</code> delegado debe tener <strong>admin consent</strong></li>`,
       tables:`<li>No se encontraron archivos válidos en la carpeta</li>
               <li>Los archivos deben llamarse <code>EXPORT_YYYYMMDD_HHMMSS.xlsx</code></li>`,
-      columns:'<li>La tabla existe pero no se pudieron leer las columnas. Verifica el formato del Excel.</li>',
-      rows:   '<li>La tabla existe pero no tiene datos. Verifica que el Office Script haya procesado el archivo.</li>'
+      'list-files':'<li>Verifica que la carpeta exista en SharePoint y contenga archivos .xlsx</li><li>El permiso <code>Files.Read.All</code> delegado debe tener <strong>admin consent</strong></li>',
+      download:'<li>No se pudo descargar el archivo. Verifica permisos y conectividad.</li>',
+      columns:'<li>No se pudieron leer las columnas del archivo. Verifica el formato del Excel.</li>',
+      rows:   '<li>El archivo más reciente no contiene datos de usuarios válidos. Verifica que el export de SLIM_UCH se haya completado correctamente.</li>'
     };
     const icon  = e.step==='auth' ? '🔐' : e.step==='site' ? '🌐' : e.step==='file' ? '📄' : e.step==='tables' ? '📊' : '⚠';
     const label = stepLabels[e.step] || 'Error desconocido';
