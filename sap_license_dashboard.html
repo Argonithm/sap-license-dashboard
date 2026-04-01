@@ -429,7 +429,8 @@ function transformarArchivoCrudo(workbook) {
   for (let i = 0; i < Math.min(5, data.length); i++) {
     const row = data[i].map(c => String(c).toLowerCase().trim());
     const userIdx = row.findIndex(c => c.includes('usuario') || c === 'user');
-    const licIdx = row.findIndex(c => c.includes('clasificación de destino') || c.includes('clasificacion de destino') || c.includes('clasificación destino'));
+    // Detect both raw SAP headers and processed Office Script headers
+    const licIdx = row.findIndex(c => c.includes('clasificación de destino') || c.includes('clasificacion de destino') || c.includes('clasificación destino') || c === 'tipo licencia' || c === 'tipo de licencia');
     if (userIdx >= 0 && licIdx >= 0) {
       headerIdx = i;
       colUser = userIdx;
@@ -441,14 +442,14 @@ function transformarArchivoCrudo(workbook) {
     }
   }
 
-  // Fallback to Office Script column positions (A=0, B=1, E=4, H=7, I=8)
+  // Fallback to Office Script output positions (A=0, B=1, C=2, E=4, F=5)
   if (headerIdx < 0) {
     headerIdx = 0;
     colUser = 0;
     colName = 1;
-    colLic = 4;
-    colStatus = 7;
-    colLogin = 8;
+    colLic = 2;
+    colStatus = 4;
+    colLogin = 5;
   }
 
   function parseType(raw) {
@@ -539,14 +540,14 @@ async function construirHistorico(headers, siteId, archivos) {
         let headerIdx = -1, typeColIdx = -1;
         for (let i = 0; i < Math.min(5, data.length); i++) {
           const row = data[i].map(c => String(c).toLowerCase().trim());
-          const tIdx = row.findIndex(c => c.includes('clasificación de destino') || c.includes('clasificacion de destino') || c.includes('clasificación destino'));
+          const tIdx = row.findIndex(c => c.includes('clasificación de destino') || c.includes('clasificacion de destino') || c.includes('clasificación destino') || c === 'tipo licencia' || c === 'tipo de licencia');
           if (tIdx >= 0) { headerIdx = i; typeColIdx = tIdx; break; }
           const fIdx = row.findIndex(c => c === 'fues' || c === 'fue');
-          if (fIdx >= 0) { headerIdx = i; typeColIdx = row.findIndex(c => c.includes('clasificación') || c.includes('clasificacion')); break; }
+          if (fIdx >= 0) { headerIdx = i; typeColIdx = row.findIndex(c => c.includes('clasificación') || c.includes('clasificacion') || c === 'tipo licencia'); break; }
         }
 
-        // Fallback to column E (index 4)
-        if (headerIdx < 0) { headerIdx = 0; typeColIdx = 4; }
+        // Fallback to column C (index 2) for processed files
+        if (headerIdx < 0) { headerIdx = 0; typeColIdx = 2; }
 
         if (typeColIdx >= 0) {
           counts = { advanced: 0, core: 0, selfservice: 0, sinclasificar: 0 };
