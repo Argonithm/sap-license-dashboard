@@ -190,10 +190,10 @@
     <label class="field-label">SharePoint Site URL</label>
     <input class="field-input" id="cfgSiteUrl" placeholder="https://tuempresa.sharepoint.com/sites/nombre-sitio"/>
 
-    <label class="field-label">Ruta del archivo Excel</label>
-    <div class="step"><div class="step-num">→</div><div class="step">Relativa a la raíz del drive. Haz clic en <strong>Explorar</strong> para buscar el archivo.</div></div>
+    <label class="field-label">Carpeta de archivos SLIM_UCH</label>
+    <div class="step"><div class="step-num">→</div><div class="step">Carpeta donde caen los exports de SAP. El dashboard lee todos los archivos <code>EXPORT_*.xlsx</code> automáticamente.</div></div>
     <div style="display:flex;gap:8px;margin-bottom:16px">
-      <input class="field-input" id="cfgFilePath" placeholder="Licencias/Salida/SLIM_UCH_FUE.xlsx" style="margin-bottom:0;flex:1"/>
+      <input class="field-input" id="cfgFilePath" placeholder="Licencias/Entrada/SLIM_UCH" style="margin-bottom:0;flex:1"/>
       <button class="btn-secondary" onclick="browseFiles()" id="btnBrowse" style="white-space:nowrap;height:42px">📂 Explorar</button>
     </div>
     <div id="fileBrowser" style="display:none;max-height:250px;overflow-y:auto;background:var(--surface2);border:1px solid var(--border);border-radius:6px;margin-bottom:16px">
@@ -613,161 +613,38 @@ async function spConnect() {
 
 async function fetchFromSharePoint() {
   const headers = spHeaders;
-  const site = { id: spSiteId };
+  const siteId = spSiteId;
+  const folderPath = CFG.filePath.replace(/^\//, '');
 
-  // Paso 3: Buscar archivo
-  setLoading('Paso 3/5 · Localizando archivo Excel...');
-  const fp   = CFG.filePath.replace(/^\//, '');
-  const fileUrl = `https://graph.microsoft.com/v1.0/sites/${site.id}/drive/root:/${fp}`;
-  const item = await graphFetch(fileUrl, headers, 'file');
-  const did  = item.parentReference.driveId;
+  // Paso 3: Listar archivos en la carpeta
+  setLoading('Paso 3/5 · Listando archivos en carpeta...');
+  const archivos = await listarArchivosEntrada(headers, siteId, folderPath);
 
-  // Paso 4: Leer tablas del workbook
-  setLoading('Paso 4/5 · Leyendo tabla de licencias...');
-  const base = `https://graph.microsoft.com/v1.0/sites/${site.id}/drives/${did}/items/${item.id}/workbook/tables`;
-  const tabs = await graphFetch(base, headers, 'tables');
-  if (!tabs.value?.length) {
-    throw { step:'tables', code:'EMPTY', detail:'El Excel no contiene tablas formateadas (ListObject). El Office Script debe crear la tabla SLIM_UCH_FUE_TABLE.' };
+  if (!archivos.length) {
+    throw { step: 'file', code: 'EMPTY', detail: `No se encontraron archivos EXPORT_*.xlsx en la carpeta ${folderPath}` };
   }
 
-  const tid  = tabs.value[0].id;
-  const [colData, rowData] = await Promise.all([
-    graphFetch(`${base}/${tid}/columns`, headers, 'columns'),
-    graphFetch(`${base}/${tid}/rows`,    headers, 'rows')
-  ]);
-  const cols = colData.value.map(c => c.name.toLowerCase().trim());
-  const rows = rowData.value;
+  // Paso 4: Descargar y transformar el mas reciente
+  const masReciente = archivos[0];
+  setLoading(`Paso 4/5 · Procesando ${masReciente.name}...`);
+  const wb = await descargarExcel(headers, siteId, masReciente);
+  const users = transformarArchivoCrudo(wb);
 
-  if (!rows.length) {
-    throw { step:'rows', code:'EMPTY', detail:'La tabla existe pero no tiene filas de datos.' };
+  if (!users.length) {
+    throw { step: 'rows', code: 'EMPTY', detail: `El archivo ${masReciente.name} no contiene datos de usuarios válidos.` };
   }
 
-  // Helper: busca valor por posibles nombres de columna (lowercase)
-  function col(obj, ...keys) {
-    for (const k of keys) { if (obj[k] !== undefined && obj[k] !== null) return obj[k]; }
-    return '';
-  }
+  // Store archivos list for historical processing
+  window._spArchivos = archivos;
 
-  // Normalizar tipo licencia: "GB Advanced Use" → "Advanced", "GC Core Use" → "Core", etc.
-  function parseType(raw) {
-    const s = String(raw).toLowerCase();
-    if (s.includes('advanced')) return 'Advanced';
-    if (s.includes('core'))     return 'Core';
-    if (s.includes('self'))     return 'Self-Service';
-    return String(raw) || 'Sin clasificar';
-  }
-
-  // Normalizar estado: "ACTIVOS" → Activo, "EXTERNOS"/"TECNICOS" → Externo/Técnico, resto → Inactivo
-  function parseStatus(raw) {
-    const s = String(raw).toLowerCase();
-    if (s.includes('activo')) return 'Activo';
-    if (s.includes('externo')) return 'Externo';
-    if (s.includes('tecnico') || s.includes('técnico')) return 'Técnico';
-    return 'Inactivo';
-  }
-
-  // Parsear fechas dd-MM-yyyy o yyyy-MM-dd o número serial Excel
-  function parseDate(raw) {
-    if (!raw) return null;
-    const s = String(raw).trim();
-    if (!s) return null;
-    // Número serial Excel (días desde 1900-01-01)
-    if (/^\d{4,5}(\.\d+)?$/.test(s)) {
-      const d = new Date(Date.UTC(1899,11,30 + Math.floor(Number(s))));
-      return isNaN(d) ? null : d;
-    }
-    // dd-MM-yyyy o dd/MM/yyyy
-    const dmy = s.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
-    if (dmy) {
-      const d = new Date(Number(dmy[3]), Number(dmy[2])-1, Number(dmy[1]));
-      return isNaN(d) ? null : d;
-    }
-    // ISO o cualquier otro formato
-    const d = new Date(s);
-    return isNaN(d) ? null : d;
-  }
-
-  return rows.map(row => {
-    const v = row.values[0], obj = {};
-    cols.forEach((c,i) => obj[c] = v[i]);
-
-    const typeKey  = parseType(col(obj, 'tipo licencia','tipo de licencia','tipo','licensetype','license type'));
-    const status   = parseStatus(col(obj, 'estado','status'));
-    const loginD   = parseDate(col(obj, 'ultimo login','último login','lastlogin','last login'));
-    const days     = loginD ? Math.floor((Date.now()-loginD)/86400000) : 999;
-
-    return {
-      user:        String(col(obj, 'usuario','user')),
-      name:        String(col(obj, 'nombre completo','nombre','name')),
-      licenseType: typeKey,
-      status:      status,
-      fue:         FUE_MAP[typeKey] ?? 0,
-      lastLogin:   loginD ? loginD.toISOString().split('T')[0] : '—',
-      daysInactive:days
-    };
-  });
+  return users;
 }
 
 // ── HISTORICAL DATA ──────────────────────────────────────
 async function fetchHistorical(headers, siteId) {
-  // Buscar SLIM_UCH_HISTORICO.xlsx en la misma carpeta que el archivo principal
-  const folder = CFG.filePath.substring(0, CFG.filePath.lastIndexOf('/'));
-  const histPath = folder ? `${folder}/SLIM_UCH_HISTORICO.xlsx` : 'SLIM_UCH_HISTORICO.xlsx';
-
-  let item;
-  try {
-    item = await graphFetch(`https://graph.microsoft.com/v1.0/sites/${siteId}/drive/root:/${histPath}`, headers, 'hist-file');
-  } catch {
-    console.log('Archivo histórico no encontrado, usando datos del snapshot actual.');
-    return null;
-  }
-
-  const did  = item.parentReference.driveId;
-  const base = `https://graph.microsoft.com/v1.0/sites/${siteId}/drives/${did}/items/${item.id}/workbook`;
-
-  // Intentar leer como tabla primero, si no como rango usado
-  let cols, rows;
-  try {
-    const tabs = await graphFetch(`${base}/tables`, headers, 'hist-tables');
-    if (tabs.value?.length) {
-      const tid = tabs.value[0].id;
-      const [cR, rR] = await Promise.all([
-        graphFetch(`${base}/tables/${tid}/columns`, headers, 'hist-cols'),
-        graphFetch(`${base}/tables/${tid}/rows`,    headers, 'hist-rows')
-      ]);
-      cols = cR.value.map(c => c.name.toLowerCase().trim());
-      rows = rR.value;
-    }
-  } catch {}
-
-  // Si no hay tabla, leer el rango usado del sheet
-  if (!cols || !rows) {
-    try {
-      const range = await graphFetch(`${base}/worksheets('Historico')/usedRange`, headers, 'hist-range');
-      if (range.values && range.values.length > 1) {
-        cols = range.values[0].map(c => String(c).toLowerCase().trim());
-        rows = range.values.slice(1).map(v => ({ values: [v] }));
-      }
-    } catch {
-      return null;
-    }
-  }
-
-  if (!cols || !rows || !rows.length) return null;
-
-  return rows.map(row => {
-    const v = row.values[0], obj = {};
-    cols.forEach((c, i) => obj[c] = v[i]);
-    return {
-      date:      String(obj['fecha'] || ''),
-      advanced:  Number(obj['advanced'] || 0),
-      core:      Number(obj['core'] || 0),
-      ss:        Number(obj['self-service'] || 0),
-      sc:        Number(obj['sin clasificar'] || 0),
-      users:     Number(obj['total usuarios'] || 0),
-      fue:       Number(obj['fue total'] || 0)
-    };
-  }).filter(r => r.date).sort((a, b) => a.date.localeCompare(b.date));
+  const archivos = window._spArchivos;
+  if (!archivos || archivos.length < 2) return null;
+  return await construirHistorico(headers, siteId, archivos);
 }
 
 // ── DEMO DATA ─────────────────────────────────────────────
@@ -1080,7 +957,7 @@ async function loadData(retryCount = 0) {
       await spConnect();
       data = await fetchFromSharePoint();
       // Paso 5: Leer histórico
-      setLoading('Paso 5/5 · Cargando datos históricos...');
+      setLoading('Paso 5/5 · Construyendo datos históricos...');
       const histData = await fetchHistorical(spHeaders, spSiteId);
       if (histData && histData.length) {
         // Agregar snapshot actual al final si no está
@@ -1107,7 +984,7 @@ async function loadData(retryCount = 0) {
     const e = err.step ? err : { step:'unknown', code:'ERR', detail:err.message||String(err) };
 
     // Retry automático para errores de archivo/tablas/red (el Excel puede estar recreándose)
-    const retryableSteps = ['file','tables','columns','rows'];
+    const retryableSteps = ['file','tables','columns','rows','list-files','download'];
     const retryableCodes = ['NETWORK', 404, 423, 500, 502, 503, 504];
     const canRetry = retryCount < MAX_RETRIES
       && (retryableSteps.includes(e.step) || retryableCodes.includes(e.code));
@@ -1142,13 +1019,12 @@ async function loadData(retryCount = 0) {
       site: `<li>URL configurada: <code>${CFG.siteUrl||'(vacía)'}</code></li>
              <li>Verifica que el sitio exista y tu cuenta tenga acceso</li>
              <li>El permiso <code>Sites.Read.All</code> delegado debe tener <strong>admin consent</strong></li>`,
-      file: `<li>Ruta configurada: <code>${CFG.filePath||'(vacía)'}</code></li>
-             <li>Verifica que el archivo exista en SharePoint en esa ubicación</li>
-             <li>Si ejecutaste SLIM_UCH recientemente, el archivo puede estar regenerándose — espera unos segundos y recarga</li>
+      file: `<li>Carpeta configurada: <code>${CFG.filePath||'(vacía)'}</code></li>
+             <li>Verifica que la carpeta exista en SharePoint y contenga archivos EXPORT_*.xlsx</li>
+             <li>Si ejecutaste SLIM_UCH recientemente, el archivo puede estar subiendo — espera unos segundos y recarga</li>
              <li>El permiso <code>Files.Read.All</code> delegado debe tener <strong>admin consent</strong></li>`,
-      tables:`<li>El archivo Excel debe contener al menos una <strong>tabla formateada</strong> (ListObject)</li>
-              <li>El Office Script debe crear la tabla <code>SLIM_UCH_FUE_TABLE</code></li>
-              <li>Si el archivo fue recreado, Power Automate puede no haber terminado de procesarlo</li>`,
+      tables:`<li>No se encontraron archivos válidos en la carpeta</li>
+              <li>Los archivos deben llamarse <code>EXPORT_YYYYMMDD_HHMMSS.xlsx</code></li>`,
       columns:'<li>La tabla existe pero no se pudieron leer las columnas. Verifica el formato del Excel.</li>',
       rows:   '<li>La tabla existe pero no tiene datos. Verifica que el Office Script haya procesado el archivo.</li>'
     };
