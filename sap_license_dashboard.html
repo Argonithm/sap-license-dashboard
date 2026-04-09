@@ -436,6 +436,7 @@ function syncMandanteSelect() {
 
 // ── MSAL ──────────────────────────────────────────────────
 async function initMsal() {
+  if (msalApp) return;
   msalApp = new msal.PublicClientApplication({
     auth: {
       clientId:    CFG.clientId,
@@ -605,7 +606,7 @@ function transformarArchivoCrudo(workbook) {
 }
 
 async function construirHistorico(headers, siteId, archivos) {
-  const FUE_VALS = { advanced: 1, core: 0.2, selfservice: 0.033 };
+  const FUE_VALS = { developer: 2, advanced: 1, core: 0.2, selfservice: 0.033 };
   const snapshots = new Map();
 
   for (const archivo of archivos) {
@@ -623,10 +624,11 @@ async function construirHistorico(headers, siteId, archivos) {
         const headers_row = data[0].map(c => String(c).toLowerCase().trim());
         if (headers_row.some(h => h.includes('total'))) {
           const vals = data[1];
-          counts = { advanced: 0, core: 0, selfservice: 0, sinclasificar: 0 };
+          counts = { developer: 0, advanced: 0, core: 0, selfservice: 0, sinclasificar: 0 };
           headers_row.forEach((h, i) => {
             const v = Number(vals[i]) || 0;
-            if (h.includes('advanced'))      counts.advanced = v;
+            if (h.includes('developer') || /\bga\b/.test(h)) counts.developer = v;
+            else if (h.includes('advanced'))      counts.advanced = v;
             else if (h.includes('core'))     counts.core = v;
             else if (h.includes('self'))     counts.selfservice = v;
             else if (h.includes('sin clas')) counts.sinclasificar = v;
@@ -649,14 +651,15 @@ async function construirHistorico(headers, siteId, archivos) {
         if (headerIdx < 0) { headerIdx = 0; typeColIdx = 2; }
 
         if (typeColIdx >= 0) {
-          counts = { advanced: 0, core: 0, selfservice: 0, sinclasificar: 0 };
+          counts = { developer: 0, advanced: 0, core: 0, selfservice: 0, sinclasificar: 0 };
           for (let i = headerIdx + 1; i < data.length; i++) {
             const row = data[i];
             if (!row || !row[0]) continue;
             const typeRaw = row[typeColIdx];
             if (!typeRaw) continue;
             const s = String(typeRaw).toLowerCase();
-            if (s.includes('advanced'))      counts.advanced++;
+            if (s.includes('developer') || /\bga\b/.test(s)) counts.developer++;
+            else if (s.includes('advanced'))      counts.advanced++;
             else if (s.includes('core'))     counts.core++;
             else if (s.includes('self'))     counts.selfservice++;
             else                             counts.sinclasificar++;
@@ -666,8 +669,8 @@ async function construirHistorico(headers, siteId, archivos) {
 
       if (!counts) continue;
 
-      const totalUsers = counts.advanced + counts.core + counts.selfservice + counts.sinclasificar;
-      const fueTotal = +(counts.advanced * FUE_VALS.advanced + counts.core * FUE_VALS.core + counts.selfservice * FUE_VALS.selfservice).toFixed(3);
+      const totalUsers = counts.developer + counts.advanced + counts.core + counts.selfservice + counts.sinclasificar;
+      const fueTotal = +(counts.developer * FUE_VALS.developer + counts.advanced * FUE_VALS.advanced + counts.core * FUE_VALS.core + counts.selfservice * FUE_VALS.selfservice).toFixed(3);
 
       // Deduplicate by date: keep the one with more users
       if (snapshots.has(dateKey)) {
@@ -691,6 +694,7 @@ async function construirHistorico(headers, siteId, archivos) {
 let spHeaders = null, spSiteId = null;
 
 async function spConnect() {
+  if (spSiteId && spHeaders) return;
   // Paso 1: Token
   setLoading('Paso 1/5 · Autenticando con Microsoft...');
   let token;
@@ -1183,7 +1187,7 @@ async function loadData(retryCount = 0) {
       <span style="color:var(--muted)">${e.code==='NETWORK'?'Sin conexión':e.code==='AUTH'?'Error de autenticación':`HTTP ${e.code}`}</span>
       ${e.detail?`<br><code style="font-size:10px;word-break:break-all;display:block;margin:8px 0;padding:6px;background:rgba(0,0,0,.3);border-radius:4px">${e.detail}</code>`:''}
       <strong>¿Cómo solucionarlo?</strong><ul>${fixes}</ul>${retryNote}`);
-    renderDashboard(demoData(), budget || 60, demoHistorical(budget || 60));
+    renderDashboard(demoData(), budget, demoHistorical(budget || 60));
   } finally {
     showOverlay(false);
   }
