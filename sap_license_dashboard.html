@@ -441,7 +441,7 @@ async function initMsal() {
     auth: {
       clientId:    CFG.clientId,
       authority:   `https://login.microsoftonline.com/${CFG.tenantId}`,
-      redirectUri: 'http://localhost:5500/sap_license_dashboard.html'
+      redirectUri: window.location.href.split('?')[0].split('#')[0]
     },
     cache: { cacheLocation:'localStorage', storeAuthStateInCookie:false }
   });
@@ -938,7 +938,7 @@ async function browseFiles(folderPath, targetInputId) {
     if (!browseToken) {
       if (!msalApp || CFG.clientId !== clientId || CFG.tenantId !== tenantId) {
         const tempApp = new msal.PublicClientApplication({
-          auth: { clientId, authority:`https://login.microsoftonline.com/${tenantId}`, redirectUri: 'http://localhost:5500/sap_license_dashboard.html' },
+          auth: { clientId, authority:`https://login.microsoftonline.com/${tenantId}`, redirectUri: window.location.href.split('?')[0].split('#')[0] },
           cache: { cacheLocation:'localStorage', storeAuthStateInCookie:false }
         });
         await tempApp.initialize();
