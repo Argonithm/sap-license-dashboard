@@ -188,7 +188,7 @@
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="modal-title">Conectar a SharePoint</div>
-    <div class="modal-sub">Autenticación con MSAL.js — el usuario inicia sesión con su cuenta Microsoft. No se requiere Client Secret en el navegador.</div>
+    <div class="modal-sub">Configuración compartida para todos los mandantes. Cada mandante tiene su propia carpeta de datos.</div>
 
     <div class="banner banner-info" style="margin-bottom:16px">
       <span class="banner-icon">ℹ</span>
@@ -197,11 +197,9 @@
     </div>
 
     <label class="field-label">Client ID (Application ID)</label>
-    <div class="step"><div class="step-num">→</div><div class="step">Azure Portal → App Registrations → tu app → <strong>Overview → Application (client) ID</strong></div></div>
     <input class="field-input" id="cfgClientId" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"/>
 
     <label class="field-label">Tenant ID (Directory ID)</label>
-    <div class="step"><div class="step-num">→</div><div class="step">Azure Portal → Azure Active Directory → <strong>Overview → Tenant ID</strong></div></div>
     <input class="field-input" id="cfgTenantId" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"/>
 
     <div class="divider"></div>
@@ -209,12 +207,54 @@
     <label class="field-label">SharePoint Site URL</label>
     <input class="field-input" id="cfgSiteUrl" placeholder="https://tuempresa.sharepoint.com/sites/nombre-sitio"/>
 
-    <label class="field-label">Carpeta de archivos SLIM_UCH</label>
-    <div class="step"><div class="step-num">→</div><div class="step">Carpeta donde caen los exports de SAP. El dashboard lee todos los archivos <code>EXPORT_*.xlsx</code> automáticamente.</div></div>
-    <div style="display:flex;gap:8px;margin-bottom:16px">
-      <input class="field-input" id="cfgFilePath" placeholder="Licencias/Entrada/SLIM_UCH" style="margin-bottom:0;flex:1"/>
-      <button class="btn-secondary" onclick="browseFiles()" id="btnBrowse" style="white-space:nowrap;height:42px">📂 Explorar</button>
+    <div class="divider"></div>
+    <label class="field-label" style="margin-bottom:12px">Mandantes SAP</label>
+
+    <div class="mandante-block">
+      <div class="mandante-header open" onclick="toggleMandanteBlock(this)">
+        <span>PRD 100 · Producción</span><span class="chevron">▼</span>
+      </div>
+      <div class="mandante-body open">
+        <label class="field-label">Carpeta SharePoint</label>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <input class="field-input" id="cfgFolderPRD100" placeholder="Licencias/Entrada/SLIM_UCH_PRD100" style="margin-bottom:0;flex:1"/>
+          <button class="btn-secondary" onclick="browseFiles(null,'cfgFolderPRD100')" style="white-space:nowrap;height:42px">📂</button>
+        </div>
+        <label class="field-label">FUEs Contratadas (presupuesto)</label>
+        <input class="field-input" id="cfgBudgetPRD100" type="number" placeholder="60"/>
+      </div>
     </div>
+
+    <div class="mandante-block">
+      <div class="mandante-header" onclick="toggleMandanteBlock(this)">
+        <span>DEV 200 · Desarrollo</span><span class="chevron">▼</span>
+      </div>
+      <div class="mandante-body">
+        <label class="field-label">Carpeta SharePoint</label>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <input class="field-input" id="cfgFolderDEV200" placeholder="Licencias/Entrada/SLIM_UCH_DEV200" style="margin-bottom:0;flex:1"/>
+          <button class="btn-secondary" onclick="browseFiles(null,'cfgFolderDEV200')" style="white-space:nowrap;height:42px">📂</button>
+        </div>
+        <label class="field-label">FUEs Contratadas (presupuesto)</label>
+        <input class="field-input" id="cfgBudgetDEV200" type="number" placeholder="0"/>
+      </div>
+    </div>
+
+    <div class="mandante-block">
+      <div class="mandante-header" onclick="toggleMandanteBlock(this)">
+        <span>DEV 100 · Desarrollo</span><span class="chevron">▼</span>
+      </div>
+      <div class="mandante-body">
+        <label class="field-label">Carpeta SharePoint</label>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <input class="field-input" id="cfgFolderDEV100" placeholder="Licencias/Entrada/SLIM_UCH_DEV100" style="margin-bottom:0;flex:1"/>
+          <button class="btn-secondary" onclick="browseFiles(null,'cfgFolderDEV100')" style="white-space:nowrap;height:42px">📂</button>
+        </div>
+        <label class="field-label">FUEs Contratadas (presupuesto)</label>
+        <input class="field-input" id="cfgBudgetDEV100" type="number" placeholder="0"/>
+      </div>
+    </div>
+
     <div id="fileBrowser" style="display:none;max-height:250px;overflow-y:auto;background:var(--surface2);border:1px solid var(--border);border-radius:6px;margin-bottom:16px">
       <div id="fileBrowserPath" style="padding:8px 12px;font-family:var(--fm);font-size:11px;color:var(--accent);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px">
         <span id="fileBrowserCrumb">/</span>
@@ -222,9 +262,6 @@
       <div id="fileBrowserList" style="padding:4px 0"></div>
       <div id="fileBrowserLoading" style="padding:12px;text-align:center;font-size:12px;color:var(--muted);display:none">Cargando...</div>
     </div>
-
-    <label class="field-label">FUEs Contratadas (presupuesto)</label>
-    <input class="field-input" id="cfgBudget" type="number" placeholder="Ej: 150"/>
 
     <div class="modal-actions">
       <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
@@ -955,6 +992,11 @@ function openModal() {
   document.getElementById('modalOverlay').classList.add('open');
 }
 function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
+
+function toggleMandanteBlock(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
 
 async function saveAndConnect() {
   CFG = {
