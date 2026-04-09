@@ -519,6 +519,7 @@ async function descargarExcel(headers, siteId, fileInfo) {
 function transformarArchivoCrudo(workbook) {
   const ws = workbook.Sheets[workbook.SheetNames[0]];
   const data = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+  console.log('[transformar] Filas totales:', data.length, '| Primeras 3 filas:', JSON.stringify(data.slice(0, 3)));
   if (data.length < 2) return [];
 
   // Find header row (within first 5 rows)
@@ -527,9 +528,11 @@ function transformarArchivoCrudo(workbook) {
 
   for (let i = 0; i < Math.min(5, data.length); i++) {
     const row = data[i].map(c => String(c).toLowerCase().trim());
-    const userIdx = row.findIndex(c => c.includes('usuario') || c === 'user');
-    // Detect both raw SAP headers and processed Office Script headers
+    // Detect user column: "usuario", "user", or raw SAP "usuar."
+    const userIdx = row.findIndex(c => c.includes('usuario') || c === 'user' || c.includes('usuar'));
+    // Detect license column: raw SAP or processed Office Script headers
     const licIdx = row.findIndex(c => c.includes('clasificación de destino') || c.includes('clasificacion de destino') || c.includes('clasificación destino') || c === 'tipo licencia' || c === 'tipo de licencia');
+    console.log(`[transformar] Fila ${i}: userIdx=${userIdx}, licIdx=${licIdx}`, row.slice(0, 11));
     if (userIdx >= 0 && licIdx >= 0) {
       headerIdx = i;
       colUser = userIdx;
@@ -537,18 +540,29 @@ function transformarArchivoCrudo(workbook) {
       colLic = licIdx;
       colStatus = row.findIndex(c => c.includes('estado') || c === 'status');
       colLogin = row.findIndex(c => c.includes('último login') || c.includes('ultimo login') || c.includes('last login'));
+      // Raw SAP format: status/login have no headers — detect by checking if colStatus was NOT found
+      // but the file has columns beyond the license column (raw SAP has ~11 cols)
+      if (colStatus < 0 && data[1] && data[1].length > 7) {
+        // Raw SAP: col H (7) = status text like "ACTIVOS", col I (8) = login as Excel serial number
+        colStatus = 7;
+        colLogin = 8;
+        console.log('[transformar] Formato crudo SAP detectado: status=col7, login=col8');
+      }
       break;
     }
   }
 
   // Fallback to Office Script output positions (A=0, B=1, C=2, E=4, F=5)
   if (headerIdx < 0) {
+    console.warn('[transformar] No se detectaron cabeceras conocidas, usando posiciones fijas');
     headerIdx = 0;
     colUser = 0;
     colName = 1;
     colLic = 2;
     colStatus = 4;
     colLogin = 5;
+  } else {
+    console.log(`[transformar] Cabecera detectada en fila ${headerIdx}: user=${colUser}, name=${colName}, lic=${colLic}, status=${colStatus}, login=${colLogin}`);
   }
 
   function parseType(raw) {
@@ -602,6 +616,7 @@ function transformarArchivoCrudo(workbook) {
     });
   }
 
+  console.log(`[transformar] Usuarios parseados: ${users.length}`, users.length ? `Primero: ${JSON.stringify(users[0])}` : '(vacío)');
   return users;
 }
 
@@ -1184,7 +1199,7 @@ async function loadData(retryCount = 0) {
     const retryNote = retryCount > 0 ? `<br><span style="color:var(--muted);font-size:11px">Se reintentó ${retryCount} ${retryCount===1?'vez':'veces'} sin éxito.</span>` : '';
     showBanner('bannerErr', `
       <strong>${icon} Falló en: ${label}</strong> (${mandanteLabel})<br>
-      <span style="color:var(--muted)">${e.code==='NETWORK'?'Sin conexión':e.code==='AUTH'?'Error de autenticación':`HTTP ${e.code}`}</span>
+      <span style="color:var(--muted)">${e.code==='NETWORK'?'Sin conexión':e.code==='AUTH'?'Error de autenticación':e.code==='EMPTY'?'Sin datos válidos':`HTTP ${e.code}`}</span>
       ${e.detail?`<br><code style="font-size:10px;word-break:break-all;display:block;margin:8px 0;padding:6px;background:rgba(0,0,0,.3);border-radius:4px">${e.detail}</code>`:''}
       <strong>¿Cómo solucionarlo?</strong><ul>${fixes}</ul>${retryNote}`);
     renderDashboard(demoData(), budget, demoHistorical(budget || 60));
