@@ -172,6 +172,11 @@
 
 <header>
   <div class="logo"><span class="logo-badge">SAP</span>License Monitor</div>
+  <select class="mandante-select" id="mandanteSelect" onchange="switchMandante(this.value)">
+    <option value="PRD100">PRD 100 · Producción</option>
+    <option value="DEV200">DEV 200 · Desarrollo</option>
+    <option value="DEV100">DEV 100 · Desarrollo</option>
+  </select>
   <div class="header-right">
     <div class="status-dot"></div>
     <span class="last-update" id="lastUpdate">—</span>
@@ -377,6 +382,18 @@ let lineChart, gaugeChart, donutChart;
 function getActiveMandante() {
   const id = CFG.activeMandante || 'PRD100';
   return CFG.mandantes?.[id] || MANDANTE_DEFAULTS[id];
+}
+
+function switchMandante(id) {
+  if (!CFG.mandantes?.[id]) return;
+  CFG.activeMandante = id;
+  localStorage.setItem('sap_fue_cfg3', JSON.stringify(CFG));
+  loadData();
+}
+
+function syncMandanteSelect() {
+  const sel = document.getElementById('mandanteSelect');
+  if (sel) sel.value = CFG.activeMandante || 'PRD100';
 }
 
 // ── MSAL ──────────────────────────────────────────────────
