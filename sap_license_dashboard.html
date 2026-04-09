@@ -13,7 +13,7 @@
     --bg:#0a0c10;--surface:#111318;--surface2:#181c24;--border:#1f2535;
     --accent:#00e5ff;--accent2:#ff6b35;--accent3:#7bed9f;--warn:#ffd32a;
     --text:#e8ecf4;--muted:#5a6480;--danger:#ff4757;
-    --adv:#00e5ff;--cor:#7bed9f;--ss:#ff6b35;
+    --adv:#00e5ff;--cor:#7bed9f;--ss:#ff6b35;--dev:#a078ff;
     --fh:'Syne',sans-serif;--fm:'Syne Mono',monospace;--fb:'DM Sans',sans-serif;--r:10px;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -147,6 +147,20 @@
 
   @media(max-width:1100px){.charts-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:600px){main{padding:16px}.kpi-grid{grid-template-columns:1fr 1fr}header{padding:0 16px}}
+
+  .mandante-select{background:var(--surface2);border:1px solid var(--border);color:var(--accent);font-family:var(--fm);font-size:12px;padding:6px 12px;border-radius:6px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2300e5ff'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;transition:border-color .2s}
+  .mandante-select:hover,.mandante-select:focus{border-color:var(--accent)}
+  .mandante-select option{background:var(--surface);color:var(--text)}
+
+  .mandante-block{border:1px solid var(--border);border-radius:8px;margin-bottom:12px;overflow:hidden}
+  .mandante-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;font-family:var(--fh);font-size:13px;font-weight:600;background:var(--surface2);transition:background .2s;user-select:none}
+  .mandante-header:hover{background:rgba(0,229,255,.06)}
+  .mandante-header .chevron{font-size:10px;color:var(--muted);transition:transform .2s}
+  .mandante-header.open .chevron{transform:rotate(180deg)}
+  .mandante-body{padding:14px;display:none}
+  .mandante-body.open{display:block}
+
+  .b-dev{background:rgba(160,120,255,.12);color:#a078ff}
 </style>
 </head>
 <body>
