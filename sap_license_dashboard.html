@@ -357,6 +357,7 @@
       </div>
       <div class="filter-row">
         <span class="chip active" onclick="setFilter('all',this)">Todos</span>
+        <span class="chip" onclick="setFilter('Developer',this)">Developer</span>
         <span class="chip" onclick="setFilter('Advanced',this)">Advanced</span>
         <span class="chip" onclick="setFilter('Core',this)">Core</span>
         <span class="chip" onclick="setFilter('Self-Service',this)">Self-Service</span>
@@ -551,6 +552,7 @@ function transformarArchivoCrudo(workbook) {
 
   function parseType(raw) {
     const s = String(raw).toLowerCase();
+    if (s.includes('developer') || /\bga\b/.test(s)) return 'Developer';
     if (s.includes('advanced')) return 'Advanced';
     if (s.includes('core'))     return 'Core';
     if (s.includes('self'))     return 'Self-Service';
@@ -799,7 +801,7 @@ function renderDashboard(data, budget, hist) {
   // Breakdown
   const by={};
   data.forEach(r=>{by[r.licenseType]=(by[r.licenseType]||0)+r.fue;});
-  const tc={'Advanced':'var(--adv)','Core':'var(--cor)','Self-Service':'var(--ss)'};
+  const tc={'Developer':'var(--dev)','Advanced':'var(--adv)','Core':'var(--cor)','Self-Service':'var(--ss)'};
   document.getElementById('fueBreakdown').innerHTML=Object.entries(by).map(([t,v])=>`
     <div class="fue-row">
       <div class="fue-dot" style="background:${tc[t]||'#888'}"></div>
@@ -812,7 +814,7 @@ function renderDashboard(data, budget, hist) {
   const dc={};
   data.forEach(r=>{dc[r.licenseType]=(dc[r.licenseType]||0)+1;});
   const dL=Object.keys(dc);
-  const dC=dL.map(t=>({'Advanced':'#00e5ff','Core':'#7bed9f','Self-Service':'#ff6b35'}[t]||'#888'));
+  const dC=dL.map(t=>({'Developer':'#a078ff','Advanced':'#00e5ff','Core':'#7bed9f','Self-Service':'#ff6b35'}[t]||'#888'));
   document.getElementById('donutTotal').textContent=data.length;
   if (donutChart) donutChart.destroy();
   donutChart=new Chart(document.getElementById('donutChart'),{
@@ -856,7 +858,7 @@ function renderTable() {
     return true;
   }).filter(r => !q||r.user.toLowerCase().includes(q)||r.name.toLowerCase().includes(q));
   rows.sort((a,b)=>{let av=a[sortCol],bv=b[sortCol];if(sortCol==='lastLogin'){av=new Date(av);bv=new Date(bv);}return av<bv?-sortDir:av>bv?sortDir:0;});
-  const bCls=t=>({'Advanced':'b-adv','Core':'b-cor','Self-Service':'b-ss'}[t]||'');
+  const bCls=t=>({'Developer':'b-dev','Advanced':'b-adv','Core':'b-cor','Self-Service':'b-ss'}[t]||'');
   document.getElementById('tableCount').textContent=`${rows.length} usuarios`;
   document.getElementById('tableBody').innerHTML=rows.map(r=>`
     <tr>
