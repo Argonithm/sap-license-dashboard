@@ -877,8 +877,10 @@ function sort(col){if(sortCol===col)sortDir*=-1;else{sortCol=col;sortDir=1;}rend
 // ── FILE BROWSER ─────────────────────────────────────────
 let browseToken = null;
 let browseSiteId = null;
+let browseTargetInput = 'cfgFolderPRD100';
 
-async function browseFiles(folderPath) {
+async function browseFiles(folderPath, targetInputId) {
+  if (targetInputId) browseTargetInput = targetInputId;
   const browser  = document.getElementById('fileBrowser');
   const list     = document.getElementById('fileBrowserList');
   const loading  = document.getElementById('fileBrowserLoading');
@@ -978,7 +980,8 @@ async function browseFiles(folderPath) {
 }
 
 function selectBrowsedFile(path) {
-  document.getElementById('cfgFilePath').value = path;
+  const folder = path.includes('.') ? path.substring(0, path.lastIndexOf('/')) : path;
+  document.getElementById(browseTargetInput).value = folder;
   document.getElementById('fileBrowser').style.display = 'none';
   browseToken = null;
   browseSiteId = null;
@@ -986,11 +989,19 @@ function selectBrowsedFile(path) {
 
 // ── MODAL ─────────────────────────────────────────────────
 function openModal() {
-  if (CFG.clientId) document.getElementById('cfgClientId').value=CFG.clientId;
-  if (CFG.tenantId) document.getElementById('cfgTenantId').value=CFG.tenantId;
-  if (CFG.siteUrl)  document.getElementById('cfgSiteUrl').value=CFG.siteUrl;
-  if (CFG.filePath) document.getElementById('cfgFilePath').value=CFG.filePath;
-  if (CFG.budget)   document.getElementById('cfgBudget').value=CFG.budget;
+  if (CFG.clientId) document.getElementById('cfgClientId').value = CFG.clientId;
+  if (CFG.tenantId) document.getElementById('cfgTenantId').value = CFG.tenantId;
+  if (CFG.siteUrl)  document.getElementById('cfgSiteUrl').value  = CFG.siteUrl;
+
+  const mandantes = CFG.mandantes || MANDANTE_DEFAULTS;
+  for (const [id, def] of Object.entries(MANDANTE_DEFAULTS)) {
+    const m = mandantes[id] || def;
+    const folderInput = document.getElementById('cfgFolder' + id);
+    const budgetInput = document.getElementById('cfgBudget' + id);
+    if (folderInput) folderInput.value = m.folder || def.folder;
+    if (budgetInput) budgetInput.value = m.budget ?? def.budget;
+  }
+
   document.getElementById('modalOverlay').classList.add('open');
 }
 function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
@@ -1001,14 +1012,24 @@ function toggleMandanteBlock(header) {
 }
 
 async function saveAndConnect() {
+  const mandantes = {};
+  for (const [id, def] of Object.entries(MANDANTE_DEFAULTS)) {
+    mandantes[id] = {
+      label:  def.label,
+      folder: document.getElementById('cfgFolder' + id)?.value.trim() || def.folder,
+      budget: parseFloat(document.getElementById('cfgBudget' + id)?.value) || 0
+    };
+  }
+
   CFG = {
     clientId: document.getElementById('cfgClientId').value.trim(),
     tenantId: document.getElementById('cfgTenantId').value.trim(),
     siteUrl:  document.getElementById('cfgSiteUrl').value.trim(),
-    filePath: document.getElementById('cfgFilePath').value.trim(),
-    budget:   parseFloat(document.getElementById('cfgBudget').value)||0
+    activeMandante: CFG.activeMandante || 'PRD100',
+    mandantes
   };
-  localStorage.setItem('sap_fue_cfg2', JSON.stringify(CFG));
+  localStorage.setItem('sap_fue_cfg3', JSON.stringify(CFG));
+  syncMandanteSelect();
   closeModal();
   await loadData();
 }
