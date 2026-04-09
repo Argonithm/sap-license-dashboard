@@ -327,14 +327,43 @@
 
 <script>
 // ── CONSTANTS ─────────────────────────────────────────────
-const FUE_MAP = { 'Advanced':1, 'Core':0.2, 'Self-Service':0.033 };
+const FUE_MAP = { 'Developer':2, 'Advanced':1, 'Core':0.2, 'Self-Service':0.033 };
 const SCOPES  = ['https://graph.microsoft.com/Sites.Read.All','https://graph.microsoft.com/Files.Read.All'];
+const MANDANTE_DEFAULTS = {
+  PRD100: { label:'Producción 100', folder:'Licencias/Entrada/SLIM_UCH_PRD100', budget:60 },
+  DEV200: { label:'Desarrollo 200', folder:'Licencias/Entrada/SLIM_UCH_DEV200', budget:0 },
+  DEV100: { label:'Desarrollo 100', folder:'Licencias/Entrada/SLIM_UCH_DEV100', budget:0 }
+};
 
 // ── STATE ─────────────────────────────────────────────────
-let CFG = JSON.parse(localStorage.getItem('sap_fue_cfg2') || '{}');
+function migrateConfig() {
+  const old = JSON.parse(localStorage.getItem('sap_fue_cfg2') || 'null');
+  if (!old) return null;
+  const cfg = {
+    clientId: old.clientId || '',
+    tenantId: old.tenantId || '',
+    siteUrl:  old.siteUrl  || '',
+    activeMandante: 'PRD100',
+    mandantes: {
+      PRD100: { label:'Producción 100', folder: old.filePath || MANDANTE_DEFAULTS.PRD100.folder, budget: old.budget || 60 },
+      DEV200: { ...MANDANTE_DEFAULTS.DEV200 },
+      DEV100: { ...MANDANTE_DEFAULTS.DEV100 }
+    }
+  };
+  localStorage.setItem('sap_fue_cfg3', JSON.stringify(cfg));
+  localStorage.removeItem('sap_fue_cfg2');
+  return cfg;
+}
+
+let CFG = JSON.parse(localStorage.getItem('sap_fue_cfg3') || 'null') || migrateConfig() || {};
 let msalApp = null;
 let allData = [], activeFilter = 'all', sortCol = 'user', sortDir = 1;
 let lineChart, gaugeChart, donutChart;
+
+function getActiveMandante() {
+  const id = CFG.activeMandante || 'PRD100';
+  return CFG.mandantes?.[id] || MANDANTE_DEFAULTS[id];
+}
 
 // ── MSAL ──────────────────────────────────────────────────
 async function initMsal() {
@@ -342,7 +371,7 @@ async function initMsal() {
     auth: {
       clientId:    CFG.clientId,
       authority:   `https://login.microsoftonline.com/${CFG.tenantId}`,
-      redirectUri: window.location.href.split('?')[0].split('#')[0]
+      redirectUri: 'http://localhost:5500/sap_license_dashboard.html'
     },
     cache: { cacheLocation:'localStorage', storeAuthStateInCookie:false }
   });
@@ -743,7 +772,7 @@ function renderDashboard(data, budget, hist) {
         ...(budget>0?[{label:'Presupuesto',data:hist.map(()=>budget),borderColor:'rgba(255,71,87,.5)',borderWidth:1.5,borderDash:[6,4],pointRadius:0,fill:false}]:[])
       ]
     },
-    options:{responsive:true,maintainAspectRatio:true,scales:{x:{grid:{color:'#1f2535'},ticks:{font:{size:11}}},y:{grid:{color:'#1f2535'},ticks:{font:{size:11}},beginAtZero:false}},plugins:{legend:{labels:{font:{size:12},boxWidth:12,padding:16}}},animation:{duration:1200,easing:'easeOutQuart'}}
+    options:{responsive:true,maintainAspectRatio:true,scales:{x:{grid:{color:'#1f2535'},ticks:{font:{size:11}}},y:{grid:{color:'#1f2535'},ticks:{font:{size:11}},min:0,max:70}},plugins:{legend:{labels:{font:{size:12},boxWidth:12,padding:16}}},animation:{duration:1200,easing:'easeOutQuart'}}
   });
 
   renderTable();
@@ -802,7 +831,7 @@ async function browseFiles(folderPath) {
     if (!browseToken) {
       if (!msalApp || CFG.clientId !== clientId || CFG.tenantId !== tenantId) {
         const tempApp = new msal.PublicClientApplication({
-          auth: { clientId, authority:`https://login.microsoftonline.com/${tenantId}`, redirectUri: window.location.href.split('?')[0].split('#')[0] },
+          auth: { clientId, authority:`https://login.microsoftonline.com/${tenantId}`, redirectUri: 'http://localhost:5500/sap_license_dashboard.html' },
           cache: { cacheLocation:'localStorage', storeAuthStateInCookie:false }
         });
         await tempApp.initialize();
