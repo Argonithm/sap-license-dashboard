@@ -711,10 +711,9 @@ async function spConnect() {
   spSiteId = site.id;
 }
 
-async function fetchFromSharePoint() {
+async function fetchFromSharePoint(folderPath) {
   const headers = spHeaders;
   const siteId = spSiteId;
-  const folderPath = CFG.filePath.replace(/^\//, '');
 
   // Paso 3: Listar archivos en la carpeta
   setLoading('Paso 3/5 · Listando archivos en carpeta...');
@@ -1067,26 +1066,31 @@ const RETRY_DELAYS = [5000, 10000, 20000]; // 5s, 10s, 20s
 
 async function loadData(retryCount = 0) {
   showOverlay(true); hideBanners();
-  const isDemo = !CFG.clientId||!CFG.tenantId||!CFG.siteUrl||!CFG.filePath;
-  const budget = CFG.budget||150;
+  const mandante = getActiveMandante();
+  const folderPath = mandante.folder?.replace(/^\//, '');
+  const isDemo = !CFG.clientId || !CFG.tenantId || !CFG.siteUrl || !folderPath;
+  const budget = mandante.budget || 0;
+  const mandanteLabel = mandante.label || CFG.activeMandante || 'PRD100';
+
+  syncMandanteSelect();
 
   try {
     let data, hist;
     if (isDemo) {
       setLoading('Cargando datos de demostración...');
       await new Promise(r=>setTimeout(r,600));
-      data = demoData(); hist = demoHistorical(budget);
+      data = demoData(); hist = demoHistorical(budget || 60);
       showBanner('bannerDemo');
       setSessionBtn(false);
     } else {
+      setLoading(`Cargando ${mandanteLabel}...`);
       await initMsal();
       await spConnect();
-      data = await fetchFromSharePoint();
+      data = await fetchFromSharePoint(folderPath);
       // Paso 5: Leer histórico
       setLoading('Paso 5/5 · Construyendo datos históricos...');
       const histData = await fetchHistorical(spHeaders, spSiteId);
       if (histData && histData.length) {
-        // Agregar snapshot actual al final si no está
         const today = new Date().toISOString().split('T')[0];
         const totalFue = +data.reduce((s,r)=>s+r.fue,0).toFixed(3);
         const last = histData[histData.length-1];
@@ -1098,18 +1102,17 @@ async function loadData(retryCount = 0) {
           fue: h.fue
         }));
       } else {
-        hist = demoHistorical(budget);
+        hist = demoHistorical(budget || 60);
       }
       const acct = msalApp.getAllAccounts()[0];
       setSessionBtn(true, acct?.username);
-      showBanner('bannerOk', `Conectado como <strong>${acct?.username||'usuario'}</strong> · ${data.length} usuarios cargados desde SharePoint.`);
+      showBanner('bannerOk', `Conectado como <strong>${acct?.username||'usuario'}</strong> · <strong>${mandanteLabel}</strong> · ${data.length} usuarios cargados.`);
     }
     renderDashboard(data, budget, hist);
   } catch(err) {
     console.error('Dashboard error:', err);
     const e = err.step ? err : { step:'unknown', code:'ERR', detail:err.message||String(err) };
 
-    // Retry automático para errores de archivo/tablas/red (el Excel puede estar recreándose)
     const retryableSteps = ['file','tables','columns','rows','list-files','download'];
     const retryableCodes = ['NETWORK', 404, 423, 500, 502, 503, 504];
     const canRetry = retryCount < MAX_RETRIES
@@ -1122,7 +1125,6 @@ async function loadData(retryCount = 0) {
       showBanner('bannerErr', `
         <strong>Archivo no disponible</strong> — es posible que se esté regenerando desde SAP.<br>
         <span style="color:var(--muted)">Reintentando automáticamente en <strong id="retryCountdown">${secs}</strong> segundos (intento ${retryCount+1}/${MAX_RETRIES})...</span>`);
-      // Countdown visual
       let remaining = secs;
       const cdInterval = setInterval(()=>{
         remaining--;
@@ -1136,8 +1138,8 @@ async function loadData(retryCount = 0) {
       return loadData(retryCount + 1);
     }
 
-    // Sin más reintentos — mostrar error detallado
     const stepLabels = { auth:'Autenticación', site:'Sitio SharePoint', file:'Archivo Excel', 'list-files':'Listado de archivos', download:'Descarga de archivo', tables:'Archivos válidos', columns:'Columnas', rows:'Datos de usuarios' };
+    const currentFolder = folderPath || '(vacía)';
     const stepFixes  = {
       auth: `<li>Verifica que el <strong>Client ID</strong> y <strong>Tenant ID</strong> sean correctos</li>
              <li>El <strong>Redirect URI</strong> en Azure (tipo SPA) debe ser exactamente: <code>${location.href.split('?')[0].split('#')[0]}</code></li>
@@ -1145,13 +1147,12 @@ async function loadData(retryCount = 0) {
       site: `<li>URL configurada: <code>${CFG.siteUrl||'(vacía)'}</code></li>
              <li>Verifica que el sitio exista y tu cuenta tenga acceso</li>
              <li>El permiso <code>Sites.Read.All</code> delegado debe tener <strong>admin consent</strong></li>`,
-      file: `<li>Carpeta configurada: <code>${CFG.filePath||'(vacía)'}</code></li>
+      file: `<li>Carpeta configurada para <strong>${mandanteLabel}</strong>: <code>${currentFolder}</code></li>
              <li>Verifica que la carpeta exista en SharePoint y contenga archivos EXPORT_*.xlsx</li>
-             <li>Si ejecutaste SLIM_UCH recientemente, el archivo puede estar subiendo — espera unos segundos y recarga</li>
-             <li>El permiso <code>Files.Read.All</code> delegado debe tener <strong>admin consent</strong></li>`,
+             <li>Si ejecutaste SLIM_UCH recientemente, el archivo puede estar subiendo — espera unos segundos y recarga</li>`,
       tables:`<li>No se encontraron archivos válidos en la carpeta</li>
               <li>Los archivos deben llamarse <code>EXPORT_YYYYMMDD_HHMMSS.xlsx</code></li>`,
-      'list-files':'<li>Verifica que la carpeta exista en SharePoint y contenga archivos .xlsx</li><li>El permiso <code>Files.Read.All</code> delegado debe tener <strong>admin consent</strong></li>',
+      'list-files':`<li>Verifica que la carpeta <code>${currentFolder}</code> exista en SharePoint</li><li>El permiso <code>Files.Read.All</code> delegado debe tener <strong>admin consent</strong></li>`,
       download:'<li>No se pudo descargar el archivo. Verifica permisos y conectividad.</li>',
       columns:'<li>No se pudieron leer las columnas del archivo. Verifica el formato del Excel.</li>',
       rows:   '<li>El archivo más reciente no contiene datos de usuarios válidos. Verifica que el export de SLIM_UCH se haya completado correctamente.</li>'
@@ -1161,18 +1162,18 @@ async function loadData(retryCount = 0) {
     const fixes = stepFixes[e.step]  || '<li>Revisa la configuración y vuelve a intentar</li>';
     const retryNote = retryCount > 0 ? `<br><span style="color:var(--muted);font-size:11px">Se reintentó ${retryCount} ${retryCount===1?'vez':'veces'} sin éxito.</span>` : '';
     showBanner('bannerErr', `
-      <strong>${icon} Falló en: ${label}</strong><br>
+      <strong>${icon} Falló en: ${label}</strong> (${mandanteLabel})<br>
       <span style="color:var(--muted)">${e.code==='NETWORK'?'Sin conexión':e.code==='AUTH'?'Error de autenticación':`HTTP ${e.code}`}</span>
       ${e.detail?`<br><code style="font-size:10px;word-break:break-all;display:block;margin:8px 0;padding:6px;background:rgba(0,0,0,.3);border-radius:4px">${e.detail}</code>`:''}
       <strong>¿Cómo solucionarlo?</strong><ul>${fixes}</ul>${retryNote}`);
-    renderDashboard(demoData(), budget, demoHistorical(budget));
+    renderDashboard(demoData(), budget || 60, demoHistorical(budget || 60));
   } finally {
     showOverlay(false);
   }
 }
 
 window.addEventListener('load', ()=>loadData());
-setInterval(()=>{ if(CFG.clientId) loadData(); }, 30*60*1000);
+setInterval(()=>{ if(CFG.clientId && CFG.mandantes) loadData(); }, 30*60*1000);
 </script>
 </body>
 </html>
