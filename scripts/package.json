@@ -1,0 +1,9 @@
+{
+  "name": "sap-snapshot",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@azure/msal-node": "^2.16.0",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  }
+}
