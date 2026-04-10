@@ -283,6 +283,10 @@
     <span class="banner-icon">✕</span>
     <div id="bannerErrText"></div>
   </div>
+  <div class="banner banner-info" id="bannerSnapshot" style="display:none">
+    <span class="banner-icon">📊</span>
+    <span id="bannerSnapshotText"></span>
+  </div>
 
   <div class="section-label">Indicadores clave</div>
   <div class="kpi-grid">
@@ -423,9 +427,16 @@ function getActiveMandante() {
 }
 
 function switchMandante(id) {
-  if (!CFG.mandantes?.[id]) return;
   CFG.activeMandante = id;
-  localStorage.setItem('sap_fue_cfg3', JSON.stringify(CFG));
+  if (CFG.mandantes?.[id]) {
+    localStorage.setItem('sap_fue_cfg3', JSON.stringify(CFG));
+  }
+  // If we have a snapshot loaded, switch within it without re-fetching
+  if (window._snapshot && window._snapshot.mandantes[id]) {
+    hideBanners();
+    renderFromSnapshot(window._snapshot);
+    return;
+  }
   loadData();
 }
 
@@ -1093,8 +1104,41 @@ function formatHistDate(dateStr) {
 }
 
 // ── BANNER HELPERS ────────────────────────────────────────
-function hideBanners(){['bannerDemo','bannerOk','bannerErr'].forEach(id=>document.getElementById(id).style.display='none');}
+function hideBanners(){['bannerDemo','bannerOk','bannerErr','bannerSnapshot'].forEach(id=>document.getElementById(id).style.display='none');}
 function showBanner(id,html){hideBanners();const el=document.getElementById(id);el.style.display='flex';const txt=el.querySelector('[id$="Text"]');if(txt&&html)txt.innerHTML=html;}
+
+// ── SNAPSHOT MODE ────────────────────────────────────────
+async function loadSnapshot() {
+  try {
+    const resp = await fetch('snapshot.json');
+    if (!resp.ok) return null;
+    const snap = await resp.json();
+    if (!snap.mandantes || !snap.generatedAt) return null;
+    return snap;
+  } catch {
+    return null;
+  }
+}
+
+function renderFromSnapshot(snap) {
+  const id = CFG.activeMandante || 'PRD100';
+  const mandante = snap.mandantes[id] || snap.mandantes[Object.keys(snap.mandantes)[0]];
+  if (!mandante || !mandante.users.length) return false;
+
+  const budget = mandante.budget || 0;
+  const hist = mandante.historical.length
+    ? mandante.historical.map(h => ({ month: formatHistDate(h.date), fue: h.fue }))
+    : demoHistorical(budget || 60);
+
+  renderDashboard(mandante.users, budget, hist);
+
+  const genDate = new Date(snap.generatedAt);
+  const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const dateStr = `${genDate.getDate()} ${months[genDate.getMonth()]} ${genDate.getFullYear()} ${String(genDate.getHours()).padStart(2,'0')}:${String(genDate.getMinutes()).padStart(2,'0')}`;
+  showBanner('bannerSnapshot', `Datos actualizados al <strong>${dateStr}</strong> · <strong>${mandante.label}</strong> · ${mandante.users.length} usuarios. Para datos en tiempo real, <a onclick="loadData()">conecta con SharePoint</a>.`);
+  setSessionBtn(false);
+  return true;
+}
 
 // ── LOAD DATA ─────────────────────────────────────────────
 const MAX_RETRIES = 3;
@@ -1109,6 +1153,17 @@ async function loadData(retryCount = 0) {
   const mandanteLabel = mandante.label || CFG.activeMandante || 'PRD100';
 
   syncMandanteSelect();
+
+  // Try snapshot for unauthenticated visitors
+  if (retryCount === 0 && isDemo) {
+    const snap = await loadSnapshot();
+    if (snap) {
+      window._snapshot = snap;
+      renderFromSnapshot(snap);
+      showOverlay(false);
+      return;
+    }
+  }
 
   try {
     let data, hist;
