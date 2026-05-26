@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-26T15:29:49.725Z",
+  "generatedAt": "2026-05-26T18:26:31.705Z",
   "mandantes": {
     "PRD100": {
       "label": "Produccion 100",
@@ -11,8 +11,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-22",
-          "daysInactive": 4
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "ACARUFFO",
@@ -29,8 +29,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-14",
-          "daysInactive": 12
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "AFLORES",
@@ -56,8 +56,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "AGIL",
@@ -74,8 +74,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "ALOZANO",
@@ -83,8 +83,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-05-18",
-          "daysInactive": 8
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "AMORALES",
@@ -101,8 +101,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "AMUZIO",
@@ -119,8 +119,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "APEREZ",
@@ -137,8 +137,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "ASAAVEDRA",
@@ -146,8 +146,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "ASANCHEZ",
@@ -155,8 +155,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "AVALDIVIA",
@@ -173,8 +173,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "BBOSS",
@@ -182,8 +182,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "BCID",
@@ -191,8 +191,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-24",
-          "daysInactive": 32
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "BCISTERNAS",
@@ -209,8 +209,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "BSANDOVAL",
@@ -272,8 +272,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CBOHN",
@@ -281,8 +281,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-18",
-          "daysInactive": 8
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CCHACON",
@@ -290,8 +290,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-19",
-          "daysInactive": 7
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CDELGADO",
@@ -344,8 +344,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CPINILLA",
@@ -389,8 +389,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CSILVA",
@@ -398,8 +398,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CSOTO",
@@ -407,8 +407,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CVARGAS",
@@ -416,8 +416,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "CVARGASH",
@@ -434,8 +434,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "DMADURO",
@@ -443,8 +443,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-19",
-          "daysInactive": 7
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "DMARTINEZ",
@@ -470,8 +470,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "EDUQUE",
@@ -479,8 +479,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "EROSSEL",
@@ -506,8 +506,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "FMONROY",
@@ -515,8 +515,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "FNANCUCHEO",
@@ -524,8 +524,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "FSAINTEMARIE",
@@ -533,8 +533,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "FSALFATE",
@@ -542,8 +542,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "FTRONCOSO",
@@ -560,8 +560,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "GCALFIN",
@@ -569,8 +569,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "GESCOBAR",
@@ -605,8 +605,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "GRETAMAL",
@@ -623,8 +623,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "IESPINOZA",
@@ -632,8 +632,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "IFERNANDEZ",
@@ -641,8 +641,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "IGARCIA",
@@ -650,8 +650,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "IPAREDES",
@@ -659,8 +659,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "IVILLENA",
@@ -704,8 +704,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JCANALES",
@@ -713,8 +713,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JFRANCIA",
@@ -722,8 +722,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JFUENMAYOR",
@@ -731,8 +731,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JGONZALEZ",
@@ -749,8 +749,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JGUZMANG",
@@ -758,8 +758,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JMARTINEZ",
@@ -776,8 +776,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "JSERER",
@@ -785,8 +785,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-04-30",
-          "daysInactive": 26
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "JVARGAS",
@@ -794,8 +794,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "KGONZALEZ",
@@ -803,8 +803,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "KKRETSCHMER",
@@ -830,8 +830,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "LDELAPAZ",
@@ -848,8 +848,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "LORTIZ",
@@ -857,8 +857,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "LYONES",
@@ -875,8 +875,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MCHANILAO",
@@ -884,8 +884,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MCORTES",
@@ -929,8 +929,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MHUERTA",
@@ -947,8 +947,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MORELLANA",
@@ -956,8 +956,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MPINTO",
@@ -965,8 +965,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MRETAMALH",
@@ -974,8 +974,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "MSALAZAR",
@@ -983,8 +983,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MSALAZARM",
@@ -992,8 +992,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-15",
-          "daysInactive": 11
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MSANCHEZ",
@@ -1028,8 +1028,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-18",
-          "daysInactive": 8
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "NGARCIA",
@@ -1037,8 +1037,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "NHORMAZABAL",
@@ -1046,8 +1046,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-05-19",
-          "daysInactive": 7
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "NIRRIBARRA",
@@ -1055,8 +1055,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "NOSSES",
@@ -1064,8 +1064,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "NPANGUI",
@@ -1073,8 +1073,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "NSORIANO",
@@ -1082,8 +1082,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "NTAMBLEY",
@@ -1100,8 +1100,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "OCARILAO",
@@ -1109,8 +1109,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "OSIERRA",
@@ -1145,8 +1145,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-15",
-          "daysInactive": 11
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "PBARRERA",
@@ -1163,8 +1163,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "POSORIO",
@@ -1181,8 +1181,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "PREYES",
@@ -1190,8 +1190,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "PS4_ADMIN",
@@ -1199,8 +1199,8 @@
           "licenseType": "Advanced",
           "status": "Externo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "PSALAS",
@@ -1208,8 +1208,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-23",
-          "daysInactive": 3
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "PURRUTIA",
@@ -1244,8 +1244,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "RPINO",
@@ -1262,8 +1262,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "RZUE",
@@ -1271,8 +1271,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "S_INTEGRACIO",
@@ -1307,8 +1307,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "SESPINOZA",
@@ -1316,8 +1316,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "SFUENZALIDA",
@@ -1352,8 +1352,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "SRODRIGUEZ",
@@ -1361,8 +1361,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-18",
-          "daysInactive": 8
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "TESCALONA",
@@ -1370,8 +1370,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "TFUENTES",
@@ -1379,8 +1379,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "TIBANEZ",
@@ -1388,8 +1388,8 @@
           "licenseType": "Advanced",
           "status": "Activo",
           "fue": 1,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "VDIAZ",
@@ -1397,8 +1397,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "VGALDAMES",
@@ -1415,8 +1415,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-05-22",
-          "daysInactive": 4
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "VREYES",
@@ -1424,8 +1424,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-20",
-          "daysInactive": 6
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "VSANGUINETTI",
@@ -1433,8 +1433,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "YMUNIZAGA",
@@ -1451,8 +1451,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-05-25",
-          "daysInactive": 1
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         }
       ],
       "historical": [
