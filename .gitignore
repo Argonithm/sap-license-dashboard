@@ -1,1 +1,14 @@
 node_modules/
+
+# Credenciales HANA — NUNCA commitear
+pass_sap.txt
+*pass*.txt
+*.pem
+*.key
+.env
+
+# Artefactos Python
+__pycache__/
+*.pyc
+.venv/
+venv/

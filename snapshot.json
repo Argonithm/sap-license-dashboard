@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-10T12:56:00.047Z",
+  "generatedAt": "2026-05-26T20:56:15.892209+00:00",
   "mandantes": {
     "PRD100": {
       "label": "Produccion 100",
@@ -10,9 +10,9 @@
           "name": "CACERES ROJAS ALEX FELIPE",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "ACARUFFO",
@@ -21,7 +21,7 @@
           "status": "Activo",
           "fue": 0.033,
           "lastLogin": "2026-04-01",
-          "daysInactive": 9
+          "daysInactive": 55
         },
         {
           "user": "ACISTERNA",
@@ -29,8 +29,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-06",
-          "daysInactive": 4
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "AFLORES",
@@ -38,8 +38,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "AFLORESC",
@@ -47,17 +47,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "AGARCIA",
           "name": "GARCIA VALENZUELA ALBERTO FELIPE",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "AGIL",
@@ -65,8 +65,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-18",
+          "daysInactive": 8
         },
         {
           "user": "AJARA",
@@ -74,8 +74,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "ALOZANO",
@@ -83,17 +83,17 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "AMORALES",
           "name": "MORALES SOLAR ANAHIS ANGELICA",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "AMUNOZ",
@@ -101,8 +101,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "AMUZIO",
@@ -110,8 +110,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-20",
+          "daysInactive": 6
         },
         {
           "user": "APEREZ",
@@ -119,8 +119,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-03-27",
-          "daysInactive": 14
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
+        },
+        {
+          "user": "APEÑA",
+          "name": "ANGELA PEÑA PALMA",
+          "licenseType": "Core",
+          "status": "Activo",
+          "fue": 0.2,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "AQUIROZ",
@@ -128,8 +137,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "ASAAVEDRA",
@@ -137,23 +146,23 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "ASANCHEZ",
           "name": "ANTONIA PAZ SANCHEZ FISCHER",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "AVALDIVIA",
           "name": "ALEJANDRO VALDIVIA",
           "licenseType": "Core",
-          "status": "Activo",
+          "status": "Inactivo",
           "fue": 0.2,
           "lastLogin": "—",
           "daysInactive": 999
@@ -161,20 +170,20 @@
         {
           "user": "AVALENZUELA",
           "name": "ANTONIO IGNACIO VALENZUELA PULGAR",
-          "licenseType": "Sin clasificar",
+          "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 0,
-          "lastLogin": "2026-02-02",
-          "daysInactive": 67
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "BBOSS",
           "name": "BENJAMIN BOSS",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "BCID",
@@ -182,8 +191,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-03-27",
-          "daysInactive": 14
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "BCISTERNAS",
@@ -191,7 +200,7 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-03-30",
+          "lastLogin": "2026-05-15",
           "daysInactive": 11
         },
         {
@@ -199,9 +208,9 @@
           "name": "BAYRON DUQUE NAVARRO",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "BSANDOVAL",
@@ -209,53 +218,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-03-30",
-          "daysInactive": 11
-        },
-        {
-          "user": "C_AZARATE",
-          "name": "ANDREA ZÁRATE",
-          "licenseType": "Sin clasificar",
-          "status": "Externo",
-          "fue": 0,
-          "lastLogin": "2026-03-19",
-          "daysInactive": 22
-        },
-        {
-          "user": "C_BAGUIRRE",
-          "name": "BERNARDO AGUIRRE",
-          "licenseType": "Sin clasificar",
-          "status": "Externo",
-          "fue": 0,
-          "lastLogin": "2026-03-23",
-          "daysInactive": 18
-        },
-        {
-          "user": "C_CPARRAGA",
-          "name": "CARLOS PARRAGA",
-          "licenseType": "Sin clasificar",
-          "status": "Externo",
-          "fue": 0,
-          "lastLogin": "2026-01-27",
-          "daysInactive": 73
-        },
-        {
-          "user": "C_MESPINOZA",
-          "name": "MARIELA ESPINOZA",
-          "licenseType": "Sin clasificar",
-          "status": "Externo",
-          "fue": 0,
-          "lastLogin": "2026-03-23",
-          "daysInactive": 18
-        },
-        {
-          "user": "C_SSEGURIDAD",
-          "name": "C_SSEGURIDAD",
-          "licenseType": "Sin clasificar",
-          "status": "Externo",
-          "fue": 0,
-          "lastLogin": "2026-02-18",
-          "daysInactive": 51
+          "lastLogin": "2026-04-20",
+          "daysInactive": 36
         },
         {
           "user": "CBASSO",
@@ -263,8 +227,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CBOHN",
@@ -272,8 +236,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-02",
-          "daysInactive": 8
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CCHACON",
@@ -281,8 +245,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CDELGADO",
@@ -290,17 +254,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-20",
+          "daysInactive": 6
         },
         {
           "user": "CHAEGER",
           "name": "CAMILA PATRICIA HAEGER SEPULVEDA",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "CHERNANDEZH",
@@ -308,8 +272,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-20",
+          "daysInactive": 6
         },
         {
           "user": "CHERRERA",
@@ -317,8 +281,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-01",
-          "daysInactive": 9
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CMUNOZ",
@@ -326,8 +290,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-04-16",
+          "daysInactive": 40
         },
         {
           "user": "CMUNOZM",
@@ -335,8 +299,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-06",
-          "daysInactive": 4
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CPINILLA",
@@ -344,17 +308,17 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-05",
+          "daysInactive": 21
         },
         {
           "user": "CRAVANAL",
           "name": "CRISTIAN RAVANAL",
           "licenseType": "Self-Service",
-          "status": "Activo",
+          "status": "Inactivo",
           "fue": 0.033,
           "lastLogin": "2025-06-11",
-          "daysInactive": 303
+          "daysInactive": 349
         },
         {
           "user": "CRIQUELME",
@@ -362,8 +326,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-14",
+          "daysInactive": 12
         },
         {
           "user": "CSALAZAR",
@@ -371,26 +335,26 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-03-27",
-          "daysInactive": 14
+          "lastLogin": "2026-05-15",
+          "daysInactive": 11
         },
         {
           "user": "CSALINAS",
           "name": "CESAR SALINAS",
           "licenseType": "Self-Service",
-          "status": "Activo",
+          "status": "Inactivo",
           "fue": 0.033,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CSILVA",
           "name": "SILVA ORTIZ CAROLINA ANDREA",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CSOTO",
@@ -398,17 +362,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "CVARGAS",
           "name": "VARGAS CIFUENTES CHARLOTTE JUDITH",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "CVARGASH",
@@ -416,8 +380,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-03-17",
-          "daysInactive": 24
+          "lastLogin": "2026-05-05",
+          "daysInactive": 21
         },
         {
           "user": "CZUNIGA",
@@ -425,35 +389,80 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
+        },
+        {
+          "user": "C_AZARATE",
+          "name": "ANDREA ZÁRATE",
+          "licenseType": "Advanced",
+          "status": "Externo",
+          "fue": 1.0,
+          "lastLogin": "2026-05-19",
+          "daysInactive": 7
+        },
+        {
+          "user": "C_BAGUIRRE",
+          "name": "BERNARDO AGUIRRE",
+          "licenseType": "Sin clasificar",
+          "status": "Externo",
+          "fue": 0.0,
+          "lastLogin": "2026-05-14",
+          "daysInactive": 12
+        },
+        {
+          "user": "C_CPARRAGA",
+          "name": "CARLOS PARRAGA",
+          "licenseType": "Sin clasificar",
+          "status": "Inactivo",
+          "fue": 0.0,
+          "lastLogin": "2026-01-27",
+          "daysInactive": 119
+        },
+        {
+          "user": "C_MESPINOZA",
+          "name": "MARIELA ESPINOZA",
+          "licenseType": "Advanced",
+          "status": "Externo",
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
+        },
+        {
+          "user": "C_SSEGURIDAD",
+          "name": "C_SSEGURIDAD",
+          "licenseType": "Sin clasificar",
+          "status": "Inactivo",
+          "fue": 0.0,
+          "lastLogin": "2026-02-18",
+          "daysInactive": 97
         },
         {
           "user": "DMADURO",
           "name": "MADURO ORTEGA DIANA CAROLINA",
-          "licenseType": "Sin clasificar",
+          "licenseType": "Core",
           "status": "Activo",
-          "fue": 0,
-          "lastLogin": "2026-02-09",
-          "daysInactive": 60
+          "fue": 0.2,
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "DMARTINEZ",
           "name": "MARTINEZ MAULEN DIEGO RAUL",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-20",
+          "daysInactive": 6
         },
         {
           "user": "EAYALA",
           "name": "AYALA ALFARO EDITH VIVIANA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "licenseType": "Sin clasificar",
+          "status": "Inactivo",
+          "fue": 0.0,
+          "lastLogin": "2026-04-09",
+          "daysInactive": 47
         },
         {
           "user": "EDIAZ",
@@ -461,8 +470,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "EDUQUE",
@@ -470,17 +479,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "EROSSEL",
           "name": "ROSSEL MATUS EDUARDO JAVIER",
           "licenseType": "Sin clasificar",
-          "status": "Activo",
-          "fue": 0,
+          "status": "Inactivo",
+          "fue": 0.0,
           "lastLogin": "2025-06-03",
-          "daysInactive": 311
+          "daysInactive": 357
         },
         {
           "user": "FBELMAR",
@@ -488,8 +497,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "FIBARRA",
@@ -497,8 +506,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "FMONROY",
@@ -506,26 +515,26 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-03-27",
-          "daysInactive": 14
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "FNANCUCHEO",
           "name": "NANCUCHEO GARAY FRANCISCO ANDRES",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "FSAINTEMARIE",
           "name": "SAINTE-MARIE FELIPE",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "FSALFATE",
@@ -533,35 +542,35 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "FTRONCOSO",
           "name": "TRONCOSO ARENAS FRANCISCA PRISCILLA",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "FVALDERRAMA",
           "name": "VALDERRAMA SCHALCHLI FERNANDA ROCIO",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "GCALFIN",
           "name": "CALFIN LLANQUINAO GREGORIO JOEL",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "GESCOBAR",
@@ -569,8 +578,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-19",
+          "daysInactive": 7
         },
         {
           "user": "GHUERTA",
@@ -578,8 +587,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-01",
-          "daysInactive": 9
+          "lastLogin": "2026-05-12",
+          "daysInactive": 14
         },
         {
           "user": "GLOPEZ",
@@ -587,24 +596,24 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-14",
+          "daysInactive": 12
         },
         {
           "user": "GPEREZ",
           "name": "GLADYS PEREZ",
-          "licenseType": "Self-Service",
+          "licenseType": "Core",
           "status": "Activo",
-          "fue": 0.033,
-          "lastLogin": "2026-04-06",
-          "daysInactive": 4
+          "fue": 0.2,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "GRETAMAL",
           "name": "RETAMAL PARRA GABRIELA DE DIOS",
           "licenseType": "Sin clasificar",
-          "status": "Activo",
-          "fue": 0,
+          "status": "Inactivo",
+          "fue": 0.0,
           "lastLogin": "—",
           "daysInactive": 999
         },
@@ -613,18 +622,27 @@
           "name": "BRISSO IGNACIO",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "IESPINOZA",
           "name": "IGNACIO ESPINOZA",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
+        },
+        {
+          "user": "IFERNANDEZ",
+          "name": "ISIDORA STEPHANY FERNANDEZ BASOALTO",
+          "licenseType": "Advanced",
+          "status": "Activo",
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "IGARCIA",
@@ -632,8 +650,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "IPAREDES",
@@ -641,17 +659,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "IVILLENA",
           "name": "ISAC VILLENA",
           "licenseType": "Sin clasificar",
-          "status": "Activo",
-          "fue": 0,
+          "status": "Inactivo",
+          "fue": 0.0,
           "lastLogin": "2026-02-17",
-          "daysInactive": 52
+          "daysInactive": 98
         },
         {
           "user": "JAGUILERA",
@@ -660,16 +678,16 @@
           "status": "Activo",
           "fue": 0.2,
           "lastLogin": "2026-03-05",
-          "daysInactive": 36
+          "daysInactive": 82
         },
         {
           "user": "JALBARRAN",
           "name": "ALBARRAN CRUZ JEAN ALEXIS",
-          "licenseType": "Self-Service",
+          "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 0.033,
-          "lastLogin": "2026-03-27",
-          "daysInactive": 14
+          "fue": 1.0,
+          "lastLogin": "2026-05-20",
+          "daysInactive": 6
         },
         {
           "user": "JBARRIENTOS",
@@ -677,8 +695,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-15",
+          "daysInactive": 11
         },
         {
           "user": "JCABELLO",
@@ -686,8 +704,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-03-27",
-          "daysInactive": 14
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JCANALES",
@@ -695,17 +713,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JFRANCIA",
           "name": "JAVIER FRANCIA FALCÓN",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JFUENMAYOR",
@@ -713,35 +731,35 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JGONZALEZ",
           "name": "JUAN GONZALEZ",
-          "licenseType": "Advanced",
+          "licenseType": "Sin clasificar",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "fue": 0.0,
+          "lastLogin": "2026-05-18",
+          "daysInactive": 8
         },
         {
           "user": "JGUZMAN",
           "name": "GUZMAN SEVERINO JESSICA MARIELA",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JGUZMANG",
           "name": "JOSÉ TOMÁS GUZMÁN GARCÍA HUIDOBRO",
-          "licenseType": "Self-Service",
+          "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 0.033,
-          "lastLogin": "2026-01-26",
-          "daysInactive": 74
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JMARTINEZ",
@@ -749,8 +767,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-03-31",
-          "daysInactive": 10
+          "lastLogin": "2026-05-18",
+          "daysInactive": 8
         },
         {
           "user": "JRODRIGUEZ",
@@ -758,35 +776,26 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-01",
-          "daysInactive": 9
-        },
-        {
-          "user": "JROMERO",
-          "name": "JOEL ROMERO",
-          "licenseType": "Sin clasificar",
-          "status": "Externo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "JSERER",
           "name": "SERER SANCHEZ JAIME ESTEBAN",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "fue": 1.0,
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "JVARGAS",
           "name": "VARGAS TRAVER JORGE ANTONIO",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "KGONZALEZ",
@@ -794,17 +803,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "KKRETSCHMER",
           "name": "KRETSCHMER SORUCO KONRAD",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-02",
-          "daysInactive": 8
+          "fue": 1.0,
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "KLARA",
@@ -812,8 +821,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-20",
+          "daysInactive": 6
         },
         {
           "user": "LASTETE",
@@ -821,8 +830,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "LDELAPAZ",
@@ -830,8 +839,17 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-19",
+          "daysInactive": 7
+        },
+        {
+          "user": "LORELLANA",
+          "name": "LESLIE ESPERANZA ORELLANA PEREZ",
+          "licenseType": "Self-Service",
+          "status": "Activo",
+          "fue": 0.033,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "LORTIZ",
@@ -839,17 +857,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "LYONES",
           "name": "YONES SILVA LISETTE DAMARY",
           "licenseType": "Core",
-          "status": "Activo",
+          "status": "Inactivo",
           "fue": 0.2,
           "lastLogin": "2026-02-13",
-          "daysInactive": 56
+          "daysInactive": 102
         },
         {
           "user": "MALBORNOZ",
@@ -857,17 +875,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MCHANILAO",
           "name": "MARIA SANDRA LUISA CHANILAO TORRES",
-          "licenseType": "Advanced",
+          "licenseType": "Core",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 0.2,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MCORTES",
@@ -875,8 +893,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-01",
-          "daysInactive": 9
+          "lastLogin": "2026-05-18",
+          "daysInactive": 8
         },
         {
           "user": "MDIAZ",
@@ -884,17 +902,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-02",
-          "daysInactive": 8
+          "lastLogin": "2026-05-19",
+          "daysInactive": 7
         },
         {
           "user": "MEVANS",
           "name": "MANUEL EVANS",
           "licenseType": "Self-Service",
-          "status": "Activo",
+          "status": "Inactivo",
           "fue": 0.033,
           "lastLogin": "2025-08-14",
-          "daysInactive": 239
+          "daysInactive": 285
         },
         {
           "user": "MFLORES",
@@ -902,8 +920,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-02",
-          "daysInactive": 8
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "MGONZALEZ",
@@ -911,35 +929,35 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MHUERTA",
           "name": "MARCELO ROMÁN HUERTA NORIEGA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "licenseType": "Sin clasificar",
+          "status": "Inactivo",
+          "fue": 0.0,
+          "lastLogin": "2026-05-07",
+          "daysInactive": 19
         },
         {
           "user": "MMARGOTH",
           "name": "MARCELA ESPERANZA MARGOTH OYARCE CARRASCO",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MORELLANA",
           "name": "MARITZA ANDREA ORELLANA MORAGA",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MPINTO",
@@ -947,17 +965,17 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MRETAMALH",
           "name": "MICHAEL RETAMAL HERNÁNDEZ",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "MSALAZAR",
@@ -965,8 +983,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MSALAZARM",
@@ -974,15 +992,15 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "MSANCHEZ",
           "name": "SANCHEZ NARANJO MANUEL IGNACIO",
           "licenseType": "Sin clasificar",
-          "status": "Activo",
-          "fue": 0,
+          "status": "Inactivo",
+          "fue": 0.0,
           "lastLogin": "—",
           "daysInactive": 999
         },
@@ -992,8 +1010,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-01",
-          "daysInactive": 9
+          "lastLogin": "2026-05-04",
+          "daysInactive": 22
         },
         {
           "user": "NCARDENAS",
@@ -1001,17 +1019,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-03-30",
-          "daysInactive": 11
+          "lastLogin": "2026-05-20",
+          "daysInactive": 6
         },
         {
           "user": "NDIAZP",
           "name": "DIAZ PINTO NATALIA VIOLETA",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "NGARCIA",
@@ -1019,17 +1037,17 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-06",
-          "daysInactive": 4
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "NHORMAZABAL",
           "name": "NATALIE PAMELA HORMAZABAL RUBIO",
-          "licenseType": "Sin clasificar",
+          "licenseType": "Self-Service",
           "status": "Activo",
-          "fue": 0,
-          "lastLogin": "2025-08-11",
-          "daysInactive": 242
+          "fue": 0.033,
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "NIRRIBARRA",
@@ -1037,26 +1055,26 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "NOSSES",
           "name": "NICOLAS ANDRES OSSES SOTOMAYOR",
-          "licenseType": "Core",
+          "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "NPANGUI",
           "name": "PANGUI MARCHANT NICOLE JACQUELINE",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "NSORIANO",
@@ -1064,26 +1082,26 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "NTAMBLEY",
           "name": "TAMBLEY VIGNES NICOLAS FELIPE",
           "licenseType": "Sin clasificar",
-          "status": "Activo",
-          "fue": 0,
+          "status": "Inactivo",
+          "fue": 0.0,
           "lastLogin": "2026-03-31",
-          "daysInactive": 10
+          "daysInactive": 56
         },
         {
           "user": "NVERA",
           "name": "VERA PARRAGUEZ NICOLAS RENIER",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "OCARILAO",
@@ -1091,17 +1109,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "OSIERRA",
           "name": "SIERRA HEREDIA OSCAR GABRIEL ANDRES",
-          "licenseType": "Advanced",
+          "licenseType": "Core",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 0.2,
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "OTORRES",
@@ -1109,8 +1127,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-06",
-          "daysInactive": 4
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "PALVAREZ",
@@ -1118,8 +1136,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-04-20",
+          "daysInactive": 36
         },
         {
           "user": "PAYALA",
@@ -1127,26 +1145,26 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-06",
-          "daysInactive": 4
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "PBARRERA",
           "name": "PEDRO BARRERA",
           "licenseType": "Self-Service",
-          "status": "Activo",
+          "status": "Inactivo",
           "fue": 0.033,
           "lastLogin": "2025-08-20",
-          "daysInactive": 233
+          "daysInactive": 279
         },
         {
           "user": "PLIRA",
           "name": "LIRA PROUST PABLO ESTEBAN",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "POSORIO",
@@ -1154,8 +1172,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-13",
+          "daysInactive": 13
         },
         {
           "user": "PPEREZ",
@@ -1163,8 +1181,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-06",
-          "daysInactive": 4
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "PREYES",
@@ -1172,17 +1190,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "PS4_ADMIN",
           "name": "PS4_ADMIN",
           "licenseType": "Advanced",
           "status": "Externo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "PSALAS",
@@ -1190,8 +1208,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "PURRUTIA",
@@ -1199,26 +1217,26 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "RDIAZ",
           "name": "ROSARIO DIAZ-DELRIO ABARCA",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-04-16",
+          "daysInactive": 40
         },
         {
           "user": "RGUZMAN",
           "name": "RAUL GUZMAN SALINAS",
           "licenseType": "Sin clasificar",
-          "status": "Activo",
-          "fue": 0,
+          "status": "Inactivo",
+          "fue": 0.0,
           "lastLogin": "2025-06-27",
-          "daysInactive": 287
+          "daysInactive": 333
         },
         {
           "user": "RPINILLA",
@@ -1226,8 +1244,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "RPINO",
@@ -1235,8 +1253,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-18",
+          "daysInactive": 8
         },
         {
           "user": "RVELASQUEZ",
@@ -1244,35 +1262,26 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "RZUE",
           "name": "ZUE PAREDES RAFAEL EDUARDO",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
-        },
-        {
-          "user": "S_INTEGRACIO",
-          "name": "Reporte SAP",
-          "licenseType": "Advanced",
-          "status": "Técnico",
-          "fue": 1,
-          "lastLogin": "2025-11-12",
-          "daysInactive": 149
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "SBROCKWAY",
           "name": "BROCKWAY MALDONADO SCARLETH ARACELY",
           "licenseType": "Sin clasificar",
-          "status": "Activo",
-          "fue": 0,
+          "status": "Inactivo",
+          "fue": 0.0,
           "lastLogin": "2026-03-09",
-          "daysInactive": 32
+          "daysInactive": 78
         },
         {
           "user": "SCIFUENTES",
@@ -1280,8 +1289,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "lastLogin": "2026-05-20",
+          "daysInactive": 6
         },
         {
           "user": "SESCARES",
@@ -1289,35 +1298,35 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "SESPINOZA",
           "name": "ESPINOZA HENRIQUEZ SEBASTIAN ALEJANDRO",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "SFUENZALIDA",
           "name": "FUENZALIDA PAVEZ SABRINA ALEJANDRA",
-          "licenseType": "Advanced",
+          "licenseType": "Core",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-02",
-          "daysInactive": 8
+          "fue": 0.2,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "SGAETE",
           "name": "SERGIO GAETE MANTERO",
-          "licenseType": "Advanced",
-          "status": "Externo",
-          "fue": 1,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
+          "licenseType": "Sin clasificar",
+          "status": "Inactivo",
+          "fue": 0.0,
+          "lastLogin": "2026-04-30",
+          "daysInactive": 26
         },
         {
           "user": "SLEON",
@@ -1325,8 +1334,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-03-12",
-          "daysInactive": 29
+          "lastLogin": "2026-05-20",
+          "daysInactive": 6
         },
         {
           "user": "SRIQUELME",
@@ -1334,8 +1343,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "SRODRIGUEZ",
@@ -1343,8 +1352,17 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
+        },
+        {
+          "user": "S_INTEGRACIO",
+          "name": "Reporte SAP",
+          "licenseType": "Advanced",
+          "status": "Inactivo",
+          "fue": 1.0,
+          "lastLogin": "2025-11-12",
+          "daysInactive": 195
         },
         {
           "user": "TESCALONA",
@@ -1352,26 +1370,26 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "TFUENTES",
           "name": "FUENTES OLGUIN TIARE ALEJANDRA",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "TIBANEZ",
           "name": "IBANEZ MAUNA TAMARA ALEJANDRA",
           "licenseType": "Advanced",
           "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "fue": 1.0,
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "VDIAZ",
@@ -1379,8 +1397,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-03-16",
-          "daysInactive": 25
+          "lastLogin": "2026-05-25",
+          "daysInactive": 1
         },
         {
           "user": "VGALDAMES",
@@ -1388,8 +1406,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-03-30",
-          "daysInactive": 11
+          "lastLogin": "2026-05-20",
+          "daysInactive": 6
         },
         {
           "user": "VMAGAÑA",
@@ -1397,8 +1415,8 @@
           "licenseType": "Self-Service",
           "status": "Activo",
           "fue": 0.033,
-          "lastLogin": "2026-03-25",
-          "daysInactive": 16
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "VREYES",
@@ -1406,8 +1424,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "VSANGUINETTI",
@@ -1415,8 +1433,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         },
         {
           "user": "YMUNIZAGA",
@@ -1424,8 +1442,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-19",
+          "daysInactive": 7
         },
         {
           "user": "YREYES",
@@ -1433,8 +1451,8 @@
           "licenseType": "Core",
           "status": "Activo",
           "fue": 0.2,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
+          "lastLogin": "2026-05-26",
+          "daysInactive": 0
         }
       ],
       "historical": [
@@ -1469,1226 +1487,10 @@
         {
           "date": "2026-04-10",
           "fue": 58.992
-        }
-      ]
-    },
-    "DEV200": {
-      "label": "Desarrollo 200",
-      "budget": 0,
-      "users": [
-        {
-          "user": "AGARCIA",
-          "name": "ALBERTO FELIPE GARCIA VALENZUELA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-02-24",
-          "daysInactive": 45
-        },
-        {
-          "user": "C_BAGUIRRE",
-          "name": "BERNARDO AGUIRRE",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
-        },
-        {
-          "user": "C_CPARRAGA",
-          "name": "CARLOS PARRAGA",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2026-04-09",
-          "daysInactive": 1
-        },
-        {
-          "user": "C_DESARROLLO",
-          "name": " C_DESARROLLO",
-          "licenseType": "Advanced",
-          "status": "Externo",
-          "fue": 1,
-          "lastLogin": "2026-02-25",
-          "daysInactive": 44
-        },
-        {
-          "user": "C_MESPINOZA",
-          "name": "MARIELA ESPINOZA",
-          "licenseType": "Advanced",
-          "status": "Externo",
-          "fue": 1,
-          "lastLogin": "2026-03-26",
-          "daysInactive": 15
-        },
-        {
-          "user": "C_MJLUCERO",
-          "name": "MARIA JOSE LUCERO",
-          "licenseType": "Advanced",
-          "status": "Externo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
-        },
-        {
-          "user": "C_MTERAN",
-          "name": "MARIA TERAN",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
-        },
-        {
-          "user": "C_NDELGADO",
-          "name": "NATALIA DELGADO",
-          "licenseType": "Advanced",
-          "status": "Externo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
-        },
-        {
-          "user": "C_RLATORRE",
-          "name": "RICARDO LATORRE",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "C_SBASIS",
-          "name": " C_SBASIS",
-          "licenseType": "Advanced",
-          "status": "Externo",
-          "fue": 1,
-          "lastLogin": "2026-01-09",
-          "daysInactive": 91
-        },
-        {
-          "user": "C_SSEGURIDAD",
-          "name": " C_SSEGURIDAD",
-          "licenseType": "Advanced",
-          "status": "Externo",
-          "fue": 1,
-          "lastLogin": "2025-12-29",
-          "daysInactive": 102
-        },
-        {
-          "user": "CKRETSCHMER",
-          "name": "CONRADO KRETSCHMER CASTAÑEDA",
-          "licenseType": "Sin clasificar",
-          "status": "Activo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "CPEREZ",
-          "name": "CEFERINO PEREZ FUENTES",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-24",
-          "daysInactive": 351
-        },
-        {
-          "user": "CSILVA",
-          "name": "CAROLINA ANDREA SILVA ORTIZ",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-03-03",
-          "daysInactive": 38
-        },
-        {
-          "user": "DS4_ADMIN",
-          "name": " DS4_ADMIN",
-          "licenseType": "Advanced",
-          "status": "Externo",
-          "fue": 1,
-          "lastLogin": "2024-12-16",
-          "daysInactive": 480
-        },
-        {
-          "user": "FNANCUCHEO",
-          "name": "FRANCISCO ANDRES NANCUCHEO GARAY",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
-        },
-        {
-          "user": "FSAINTEMARIE",
-          "name": "FELIPE SAINTE MARIE",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-09",
-          "daysInactive": 1
-        },
-        {
-          "user": "IESPINOZA",
-          "name": "IGNACIO ESPINOZA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "IKRETSCHMER",
-          "name": "ISADORA KRETSCHMER",
-          "licenseType": "Self-Service",
-          "status": "Activo",
-          "fue": 0.033,
-          "lastLogin": "2025-02-19",
-          "daysInactive": 415
-        },
-        {
-          "user": "JALBARRAN",
-          "name": "JEAN ALEXIS ALBARRAN CRUZ",
-          "licenseType": "Self-Service",
-          "status": "Activo",
-          "fue": 0.033,
-          "lastLogin": "2026-03-09",
-          "daysInactive": 32
-        },
-        {
-          "user": "JDIAZ",
-          "name": "JOAQUIN ARIEL DIAZ BARRIGA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2025-12-02",
-          "daysInactive": 129
-        },
-        {
-          "user": "JFRANCIA",
-          "name": "JAVIER FRANCIA FALCÓN",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "JMORAN",
-          "name": "JUAN CARLOS MORAN SOTO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-05-13",
-          "daysInactive": 332
-        },
-        {
-          "user": "JORELLANA",
-          "name": "JOSE ORELLANA NUNEZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-05-05",
-          "daysInactive": 340
-        },
-        {
-          "user": "JROMERO",
-          "name": "JOEL ROMERO",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "JSERER",
-          "name": "JAIME ESTEBAN SERER SANCHEZ",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "JTRONCOSO",
-          "name": "JAVIERA JOHANNA TRONCOSO FLORES",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "JVARGAS",
-          "name": "JORGE ANTONIO VARGAS TRAVER",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-03-23",
-          "daysInactive": 18
-        },
-        {
-          "user": "JZAPATA",
-          "name": "JOSE ANTONIO ZAPATA MELLADO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-29",
-          "daysInactive": 346
-        },
-        {
-          "user": "KGONZALEZ",
-          "name": "KARINA ANDREA GONZALEZ CARO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "KKRETSCHMER",
-          "name": "KONRAD KRETSCHMER",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2025-02-24",
-          "daysInactive": 410
-        },
-        {
-          "user": "KLARA",
-          "name": "KEVIN ALEJANDRO LARA LUENGO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-07-21",
-          "daysInactive": 263
-        },
-        {
-          "user": "KPARRA",
-          "name": "KARINA DANAE PARRA SILVA",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "LASTETE",
-          "name": "LAURA ESTER ASTETE TORRES",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2025-04-02",
-          "daysInactive": 373
-        },
-        {
-          "user": "LLOPEZ",
-          "name": "LILIAN LOPEZ NAVARRETE",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "LORELLANA",
-          "name": "LESLIE ESPERANZA ORELLANA PEREZ",
-          "licenseType": "Sin clasificar",
-          "status": "Activo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "LORTIZ",
-          "name": "LORENA JACQUELINE ORTIZ NAVARRO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-05-05",
-          "daysInactive": 340
-        },
-        {
-          "user": "LQUILODRAN",
-          "name": "LUPEZ EDITH QUILODRAN FUENTES",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-22",
-          "daysInactive": 353
-        },
-        {
-          "user": "LSILVA",
-          "name": "LUIS ALBERTO SILVA KONG",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "LSOTO",
-          "name": "LUCIA CATALINA SOTO LIZAMA",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "LYONES",
-          "name": "LISETTE DAMARY YONES SILVA",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "MCHANILAO",
-          "name": "MARIA SANDRA LUISA CHANILAO TORRES",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-05-08",
-          "daysInactive": 337
-        },
-        {
-          "user": "MDIAZ",
-          "name": "MILAGROS CAROLINA DIAZ CAMACHO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-22",
-          "daysInactive": 353
-        },
-        {
-          "user": "MDONOSO",
-          "name": "MYRIAN MARIBEL DONOSO LAGOS",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2025-02-18",
-          "daysInactive": 416
-        },
-        {
-          "user": "MESCOBAR",
-          "name": "MONICA ROSSANA ESCOBAR GARRIDO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "MFLORES",
-          "name": "MONICA ALEJANDRA FLORES SALAZAR",
-          "licenseType": "Self-Service",
-          "status": "Activo",
-          "fue": 0.033,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "MGUTIERREZ",
-          "name": "MARIA VICTORIA GUTIERREZ MORALES",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "MHERRERA",
-          "name": "MANUEL ESTEBAN HERRERA BUGUENO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-24",
-          "daysInactive": 351
-        },
-        {
-          "user": "MMACHUCA",
-          "name": "MELISSA MERISEL MACHUCA MUNOZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "MMORALES",
-          "name": "MANUEL ALEJANDRO MORALES INOSTROZA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2025-11-21",
-          "daysInactive": 140
-        },
-        {
-          "user": "MMOYA",
-          "name": "MARIANELA INES MOYA CORREA",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "MORELLANA",
-          "name": "MARITZA ANDREA ORELLANA MORAGA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "MOSORIO",
-          "name": "MARIA JOSE OSORIO CARCAMO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "MPINTO",
-          "name": "MELISSA ANDREA PINTO PARADA",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-23",
-          "daysInactive": 352
-        },
-        {
-          "user": "MSALAZAR",
-          "name": "MARIO ANTONIO SALAZAR COLLADO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-24",
-          "daysInactive": 351
-        },
-        {
-          "user": "MSALAZARM",
-          "name": "MARIA SOLEDAD SALAZAR MORENO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-05-15",
-          "daysInactive": 330
-        },
-        {
-          "user": "MSANCHEZ",
-          "name": "MANUEL IGNACIO SANCHEZ NARANJO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-29",
-          "daysInactive": 346
-        },
-        {
-          "user": "MVALENZUELA",
-          "name": "MAGALY VALESKA DANIELA VALENZUELA JAQUE",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "NDIAZP",
-          "name": "NATALIA VIOLETA DIAZ PINTO",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "NPANGUI",
-          "name": "NICOLE JACQUELINE PANGUI MARCHANT",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2025-05-05",
-          "daysInactive": 340
-        },
-        {
-          "user": "NSORIANO",
-          "name": "NICOL ALEJANDRA SORIANO HUENUPIL",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "NTAMBLEY",
-          "name": "NICOLAS FELIPE TAMBLEY VIGNES",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2025-11-28",
-          "daysInactive": 133
-        },
-        {
-          "user": "NVERA",
-          "name": "NICOLAS RENIER VERA PARRAGUEZ",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-09",
-          "daysInactive": 1
-        },
-        {
-          "user": "OCARILAO",
-          "name": "OLIVIA LUZ CARILAO HUENCHULLAN",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "ODIAZ",
-          "name": "ORIANA ANGELA DIAZ MORALES",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-22",
-          "daysInactive": 353
-        },
-        {
-          "user": "OSIERRA",
-          "name": "OSCAR GABRIEL ANDRES SIERRA HEREDIA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-04-09",
-          "daysInactive": 1
-        },
-        {
-          "user": "OTORRES",
-          "name": "ORLANDO JOSE TORRES PENARANDA",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-10",
-          "daysInactive": 365
-        },
-        {
-          "user": "PALVAREZ",
-          "name": "PAULINA IGNACIA ALVAREZ MUNOZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "PARRATIA",
-          "name": "PATRICIO ARRATIA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2025-09-15",
-          "daysInactive": 207
-        },
-        {
-          "user": "PDEZORZI",
-          "name": "PIERANGELA DE ZORZI HERNANDEZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-03-04",
-          "daysInactive": 402
-        },
-        {
-          "user": "PGALVEZ",
-          "name": "PATRICIA CECILIA GALVEZ CORONADO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "PLIRA",
-          "name": "PABLO LIRA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2025-06-16",
-          "daysInactive": 298
-        },
-        {
-          "user": "PPEREZ",
-          "name": "PAZ PEREZ LLANQUILEF",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "PREYES",
-          "name": "PATRICIO EMILIO REYES BELLO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-29",
-          "daysInactive": 346
-        },
-        {
-          "user": "PRUEBA",
-          "name": " PRUEBA",
-          "licenseType": "Self-Service",
-          "status": "Inactivo",
-          "fue": 0.033,
-          "lastLogin": "2025-12-23",
-          "daysInactive": 108
-        },
-        {
-          "user": "PSALAS",
-          "name": "PAZ FERNANDA SALAS NILO",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-24",
-          "daysInactive": 351
-        },
-        {
-          "user": "RCABELLO",
-          "name": "RICARDO ESTEBAN CABELLO MOREIRA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "RCUEVAS",
-          "name": "RICARDO CUEVAS PEREZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "RFUSCHINI",
-          "name": "RUTH ELENA FUSCHINI DIAZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "RGOMEZ",
-          "name": "RAUL ALBERTO GOMEZ MIRANDA",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "RMUNOZ",
-          "name": "ROXANA DEL CARMEN MUNOZ FERNANDEZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "RPINILLA",
-          "name": "RAYEN ALEJANDRA PINILLA GALVEZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-22",
-          "daysInactive": 353
-        },
-        {
-          "user": "RTORRES",
-          "name": "RODRIGO ADOLFO TORRES OTEIZA",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "RVEGA",
-          "name": "RODRIGO ANDRES VEGA HERNANDEZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "RZUE",
-          "name": "RAFAEL EDUARDO ZUE PAREDES",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-03-20",
-          "daysInactive": 21
-        },
-        {
-          "user": "SAP_SUPPORT",
-          "name": " SAP_SUPPORT",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2025-03-31",
-          "daysInactive": 375
-        },
-        {
-          "user": "SBROCKWAY",
-          "name": "SCARLETH ARACELY BROCKWAY MALDONADO",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-01-26",
-          "daysInactive": 74
-        },
-        {
-          "user": "SESCARES",
-          "name": "SEBASTIAN ESCARES MUNDACA",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-14",
-          "daysInactive": 361
-        },
-        {
-          "user": "SESPINOZA",
-          "name": "SEBASTIAN ALEJANDRO ESPINOZA HENRIQUEZ",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-03-17",
-          "daysInactive": 24
-        },
-        {
-          "user": "SFUENZALIDA",
-          "name": "SABRINA ALEJANDRA FUENZALIDA PAVEZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-08-12",
-          "daysInactive": 241
-        },
-        {
-          "user": "SGAETE",
-          "name": "SERGIO GAETE MANTERO",
-          "licenseType": "Advanced",
-          "status": "Externo",
-          "fue": 1,
-          "lastLogin": "2026-04-09",
-          "daysInactive": 1
-        },
-        {
-          "user": "SLAVAUD",
-          "name": "SOL JOSEFINA LAVAUD VILLALOBOS",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2025-02-18",
-          "daysInactive": 416
-        },
-        {
-          "user": "SLEON",
-          "name": "SIMKIANG ARMANDO LEON LOPEZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-29",
-          "daysInactive": 346
-        },
-        {
-          "user": "SRIQUELME",
-          "name": "SAUL ALFREDO RIQUELME MUÑOZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "SRODRIGUEZ",
-          "name": "SOLEDAD DEL CARMEN RODRIGUEZ IBARRA",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-30",
-          "daysInactive": 345
-        },
-        {
-          "user": "TESCALONA",
-          "name": "TANIA EDTIH ESCALONA ORDENES",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-09-24",
-          "daysInactive": 198
-        },
-        {
-          "user": "TFUENTES",
-          "name": "TIARE ALEJANDRA FUENTES OLGUIN",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2026-01-22",
-          "daysInactive": 78
-        },
-        {
-          "user": "TIBANEZ",
-          "name": "TAMARA ALEJANDRA IBANEZ MAUNA",
-          "licenseType": "Advanced",
-          "status": "Activo",
-          "fue": 1,
-          "lastLogin": "2025-11-27",
-          "daysInactive": 134
-        },
-        {
-          "user": "TORTEGA",
-          "name": "TIARE BELEN ORTEGA PEÑA",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "TSANMARTIN",
-          "name": "TAMARA PAOLA SAN MARTIN VARGAS",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "VSANGUINETTI",
-          "name": "VALERIA SANGUINETTI SAEZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-07-21",
-          "daysInactive": 263
-        },
-        {
-          "user": "XFLORES",
-          "name": "XIMENA ELBA FLORES SANCHEZ",
-          "licenseType": "Core",
-          "status": "Activo",
-          "fue": 0.2,
-          "lastLogin": "2025-04-24",
-          "daysInactive": 351
-        }
-      ],
-      "historical": [
-        {
-          "date": "2026-04-09",
-          "fue": 53.532
-        },
-        {
-          "date": "2026-04-10",
-          "fue": 53.532
-        }
-      ]
-    },
-    "DEV100": {
-      "label": "Desarrollo 100",
-      "budget": 0,
-      "users": [
-        {
-          "user": "C_BAGUIRRE",
-          "name": "BERNARDO AGUIRRE",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
-        },
-        {
-          "user": "C_DESARROLLO",
-          "name": " C_DESARROLLO",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2026-03-23",
-          "daysInactive": 18
-        },
-        {
-          "user": "C_MESPINOZA",
-          "name": "MARIELA ESPINOZA",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2025-09-15",
-          "daysInactive": 207
-        },
-        {
-          "user": "C_MJLUCERO",
-          "name": "MARIA JOSE LUCERO",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2026-04-08",
-          "daysInactive": 2
-        },
-        {
-          "user": "C_RBERNAL",
-          "name": "RODRIGO BERNAL",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2026-04-07",
-          "daysInactive": 3
-        },
-        {
-          "user": "C_RLATORRE",
-          "name": "RICARDO LATORRE",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2026-03-18",
-          "daysInactive": 23
-        },
-        {
-          "user": "C_SBASIS",
-          "name": " C_SBASIS",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2026-04-09",
-          "daysInactive": 1
-        },
-        {
-          "user": "CCHACON",
-          "name": "CARLA CHACON",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "CHAEGER",
-          "name": "CAMILA HAEGER",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "DEMO_01",
-          "name": "NOMBRE_01 APELLIDO_01",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "DEMO_100",
-          "name": " DEMO100",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2025-03-13",
-          "daysInactive": 393
-        },
-        {
-          "user": "DMARTINEZ",
-          "name": "DIEGO MARTINEZ",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "FSAINTEMARIE",
-          "name": "FELIPE SAINTEMARIE",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2025-09-12",
-          "daysInactive": 210
-        },
-        {
-          "user": "IBRISSO",
-          "name": "IGNACIO BRISSO",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "IESPINOZA",
-          "name": "IGNACIO ESPINOZA",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "IKRETSCHMER",
-          "name": "ISIDORA IKRETSCHMER",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "JFRANCIA",
-          "name": "JAVIER FRANCIA FALCÓN",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "JVARGAS",
-          "name": "JORGE VARGAS",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "KKRETSCHMER",
-          "name": "KONRAD KRETSCHMER",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "MMORALES",
-          "name": "MANUEL MORALES",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "NTAMBLEY",
-          "name": "NICOLAS TAMBLEY",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "NVERA",
-          "name": "NICOLAS VERA",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2026-04-09",
-          "daysInactive": 1
-        },
-        {
-          "user": "OSIERRA",
-          "name": "OSCAR SIERRA",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "PARRATIA",
-          "name": "PATRICIO ARRATIA",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "PLIRA",
-          "name": "PABLO LIRA",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "TEST",
-          "name": " TEST",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "2025-02-05",
-          "daysInactive": 429
-        },
-        {
-          "user": "TESTBP",
-          "name": " TESTBP",
-          "licenseType": "Core",
-          "status": "Inactivo",
-          "fue": 0.2,
-          "lastLogin": "2025-03-18",
-          "daysInactive": 388
-        },
-        {
-          "user": "TIBANEZ",
-          "name": "TAMARA IBANEZ",
-          "licenseType": "Sin clasificar",
-          "status": "Inactivo",
-          "fue": 0,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "USER_FUE",
-          "name": "",
-          "licenseType": "Core",
-          "status": "Inactivo",
-          "fue": 0.2,
-          "lastLogin": "—",
-          "daysInactive": 999
-        },
-        {
-          "user": "USER_TEST",
-          "name": " USER_TEST",
-          "licenseType": "Advanced",
-          "status": "Inactivo",
-          "fue": 1,
-          "lastLogin": "2025-01-23",
-          "daysInactive": 442
-        }
-      ],
-      "historical": [
-        {
-          "date": "2026-04-09",
-          "fue": 13.4
         },
         {
-          "date": "2026-04-10",
-          "fue": 13.4
+          "date": "2026-05-26",
+          "fue": 59.959
         }
       ]
     }

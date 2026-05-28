@@ -1,0 +1,44 @@
+name: Refresh FUE snapshot
+
+# Solo manual: se dispara desde la pestaña Actions con "Run workflow".
+# (Sin cron — así lo definió la operación de Lab Prater.)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    # Corre en el runner self-hosted DENTRO de la red de Lab Prater,
+    # único con acceso a HANA 192.168.254.25.
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Generar snapshot desde HANA
+        shell: pwsh
+        run: |
+          py -3 scripts/generate_snapshot.py
+        # hana_conn lee la credencial de C:\dev\sap\pass_sap.txt (fuera del repo).
+        # Si el archivo vive en otra ruta, define SAP_CRED_FILE en el entorno del runner.
+
+      - name: Commit y push si hubo cambios
+        shell: pwsh
+        run: |
+          git config user.name  "fue-snapshot-bot"
+          git config user.email "fue-snapshot-bot@users.noreply.github.com"
+          git add snapshot.json
+          $changed = (git status --porcelain snapshot.json)
+          if ([string]::IsNullOrWhiteSpace($changed)) {
+            Write-Host "Sin cambios en snapshot.json — nada que commitear."
+          } else {
+            $stamp = Get-Date -Format "yyyy-MM-dd HH:mm"
+            git commit -m "chore: refresh FUE snapshot ($stamp)"
+            git push origin main
+            Write-Host "snapshot.json actualizado y pusheado."
+          }
